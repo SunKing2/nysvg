@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    circle, rect, line, polyline {
+      stroke: black;
+      fill: none;
+    stroke-width: 1;
+    }
+    #rect01 {
+      fill: red;
+      stroke: green;
+      stroke-width: 12;
+    }
+    #circle01 {
+      stroke: black;
+      fill: none;
+    }
+    .louiediv {
+      padding: 0;
+      margin: 0;
+      border: 0;
+      background-color: white;
+    }
+    .louiediv:nth-of-type(odd) {
+        background-color: #dedccd;
+    }
+    .quarterdiv {
+      width: 100px;
+      height: 100px;
+    }
+    body {
+      background-color: #009;
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+
+<div class="louiediv">
+  <svg width="200" height="200">
+    <g id="platform">
+      <circle cx="25" cy="25" r="25" style="fill: pink" />
+      <line x1="0" y1="50" x2="50" y2="50" />
+    </g>
+    <use xlink:href="#platform" transform="translate(0 50)" />
+  </svg>
+</div>
+
+<div class="louiediv quarterdiv" >
+  <svg width="50%" height="50%" viewBox="0 0 50% 50%">
+    <rect x="0" y="0" width="25" height="25" style="stroke: black; fill: none;"/>
+    <rect x="25" y="0" width="25" height="25" style="stroke: black; fill: none;"/>
+    <rect x="0" y="25" width="25" height="25" style="stroke: black; fill: none;"/>
+      <svg width="25%" height="25%" viewBox="-100 -100 200 200">
+        <rect x="0" y="0" width="25" height="25" style="stroke: black; fill: none;"/>
+      </svg>
+  </svg>
+</div>
+
+<div class="louiediv">
+  <svg width="928" height="4719">
+    <rect x="339" y="1615" width="250" height="65"></rect>
+    <rect x="351.5" y="2115" width="225" height="60"></rect>
+    <rect x="364" y="2615" width="200" height="55"></rect>
+    <rect x="376.5" y="3115" width="175" height="50"></rect>
+    <rect x="389" y="3615" width="150" height="45"></rect>
+  </svg>
+</div>
+
+
+
+</body>
+</html>

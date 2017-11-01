@@ -1,0 +1,10 @@
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" style="enable-background:new" xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 100 100">
+ <defs>
+  <filter id="a" style="color-interpolation-filters:sRGB">
+   <feBlend in2="BackgroundImage" mode="darken"/>
+  </filter>
+ </defs>
+ <g transform="translate(27.5 -993.86)" filter="url(#a)">
+  <rect fill-rule="evenodd" height="49.876" width="69.876" stroke="#000" y="1003.9" x="-7.4379" fill="#00f"/>
+ </g>
+</svg>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   width="4000"
+   height="6000"
+   viewBox="0 0 4000 6000"
+   sodipodi:docname="mast1.svg">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4144">
+      <feBlend
+         inkscape:collect="always"
+         mode="darken"
+         in2="BackgroundImage"
+         id="feBlend4146" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1440"
+     inkscape:window-height="851"
+     id="namedview4"
+     showgrid="false"
+     inkscape:zoom="0.31466667"
+     inkscape:cx="1564.1267"
+     inkscape:cy="2216.2796"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <image
+     sodipodi:absref="/home/louie/prog/graphics/mine/wtc/technology-skyscraper-new-york-antenna-vehicle-tower-mast-spire-steeple-one-world-trade-center-control-tower-electronics-accessory-342810.jpg"
+     xlink:href="technology-skyscraper-new-york-antenna-vehicle-tower-mast-spire-steeple-one-world-trade-center-control-tower-electronics-accessory-342810.jpg"
+     transform="matrix(0.99999391,-0.00349065,0.00349065,0.99999391,0,0)"
+     y="6.9630256"
+     x="-10.484138"
+     id="image10"
+     preserveAspectRatio="none"
+     height="6000"
+     width="4000" />
+  <g
+     style="display:inline"
+     id="g8110"
+     transform="matrix(4.1739018,0,0,4.1739018,-5714.0883,-44.436409)">
+    <path
+       inkscape:transform-center-x="5.725102e-05"
+       sodipodi:type="star"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter4144);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       id="path8136-3"
+       sodipodi:sides="3"
+       sodipodi:cx="5737.0664"
+       sodipodi:cy="1132.8"
+       sodipodi:r1="126.66189"
+       sodipodi:r2="63.330948"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.5707963"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 5846.7588,1196.131 -219.3848,0 109.6924,-189.9928 z"
+       inkscape:transform-center-y="-187.74003"
+       transform="matrix(0.97089669,0,0,5.9288581,-3792.0988,-5899.5374)" />
+    <path
+       transform="matrix(1,0,0,2.1088138,-3959.0664,-1330.264)"
+       inkscape:transform-center-y="-66.776539"
+       d="m 5846.7588,1196.131 -219.3848,0 109.6924,-189.9928 z"
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="1.5707963"
+       sodipodi:arg1="0.52359878"
+       sodipodi:r2="63.330948"
+       sodipodi:r1="126.66189"
+       sodipodi:cy="1132.8"
+       sodipodi:cx="5737.0664"
+       sodipodi:sides="3"
+       id="path8111-6"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter4144);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       sodipodi:type="star" />
+  </g>
+</svg>
