@@ -1,3 +1,30 @@
+def octagon(level):
+    squarex = level[0]
+    squarew = level[2]
+    squareh = level[3]
+    squarey = pheight - level[1] - squareh
+    x1 = squarex
+    x2 = squarex + 1 * squarew / 3
+    x3 = squarex + 2 * squarew / 3
+    x4 = squarex +     squarew
+
+    y1 = squarey
+    y2 = squarey + 1 * squareh / 3
+    y3 = squarey + 2 * squareh / 3
+    y4 = squarey + squareh
+
+    print """
+      <polyline fill="blue" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
+
+    """.format(
+        x2, y1, x3, y1,
+        x4, y2, x4, y3,
+        x3, y4, x2, y4,
+        x1, y3, x1, y2
+    )
+
+
+
 pheight = 4719
 pwidth = 928
 
@@ -47,34 +74,8 @@ for level in levels:
     <xqzrect id="level1" x="{}" y="{}" width="{}" height="{}"></xqzrect>""".format(
         level[0], pheight - level[1] - level[3], level[2], level[3]
         )
+    octagon(level)
 
-
-# -------- start of 2nd level ------------
-level = levels[1]
-squarex = level[0]
-squarew = level[2]
-squareh = level[3]
-squarey = pheight - level[1] - squareh
-x1 = squarex
-x2 = squarex + 1 * squarew / 3
-x3 = squarex + 2 * squarew / 3
-x4 = squarex +     squarew
-
-y1 = squarey
-y2 = squarey + 1 * squareh / 3
-y3 = squarey + 2 * squareh / 3
-y4 = squarey + squareh
-
-print """
-  <polyline fill="blue" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
-
-""".format(
-    x2, y1, x3, y1,
-    x4, y2, x4, y3,
-    x3, y4, x2, y4,
-    x1, y3, x1, y2
-)
-# -------- end of 2nd level ------------
 
 print """
   </svg>
