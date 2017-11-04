@@ -1,5 +1,23 @@
-barrierh = 45
+pheight = 4719
+pwidth = 928
+
+barrierh = 43
 barrierbaseh = 8
+
+
+def barrier(level, color):
+    squarex = level[0]
+    squarew = level[2]
+    squareh = level[3]
+    squarey = pheight - level[1] - squareh
+    x2 = squarex + 1 * squarew / 3
+
+    barriery = squarey - barrierbaseh - barrierh
+    print """
+    <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="{}" stroke-width="4px"></rect>""".format(
+        x2, barriery, squarew / 3, barrierh,
+        color
+        )
 
 
 def octagon(level, color):
@@ -30,18 +48,9 @@ def octagon(level, color):
 
     print "<".format()
 
-    barriery = squarey - barrierbaseh - barrierh
-    print """
-    <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="#666" stroke-width="4px"></rect>""".format(
-        x2, barriery, squarew / 3, barrierh
-        )
 
 
 
-
-
-pheight = 4719
-pwidth = 928
 
 # the cartesian coordinates of each basket in the WTC tower
 # the program converts cartesian to regular coordinates for SVG
@@ -75,7 +84,7 @@ print """
 
 
   <svg width="92.8" height="471.9" viewBox="0 0 928 4719">
-  <image xlink:href="centeringtower5withreflectionxqz.png"
+  <image xlink:href="centeringtower5withreflection.png"
   x="0" y="0"
   width="928" height="4719"/>
   """
@@ -87,7 +96,8 @@ for level in levels:
         )
     biglevel = (level[0], level[1], level[2], level[3] + 6)
     octagon(biglevel, "#777")
-    octagon(level, "#333")
+    octagon(level, "#222")
+    barrier(level, "#333")
 
 
 print """
