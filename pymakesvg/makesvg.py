@@ -1,4 +1,8 @@
-def octagon(level):
+barrierh = 45
+barrierbaseh = 8
+
+
+def octagon(level, color):
     squarex = level[0]
     squarew = level[2]
     squareh = level[3]
@@ -14,14 +18,25 @@ def octagon(level):
     y4 = squarey + squareh
 
     print """
-      <polyline fill="blue" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
+      <polyline fill="{}" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
 
     """.format(
+        color,
         x2, y1, x3, y1,
         x4, y2, x4, y3,
         x3, y4, x2, y4,
         x1, y3, x1, y2
     )
+
+    print "<".format()
+
+    barriery = squarey - barrierbaseh - barrierh
+    print """
+    <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="#666" stroke-width="4px"></rect>""".format(
+        x2, barriery, squarew / 3, barrierh
+        )
+
+
 
 
 
@@ -40,13 +55,9 @@ levels = [
 (389,   3615,  150,  45),
 ]
 
+
+
 print """
-
-
-
-
-
-
 <html>
 <head>
   <style>
@@ -64,7 +75,7 @@ print """
 
 
   <svg width="92.8" height="471.9" viewBox="0 0 928 4719">
-  <image xlink:href="centeringtower5withreflection.png"
+  <image xlink:href="centeringtower5withreflectionxqz.png"
   x="0" y="0"
   width="928" height="4719"/>
   """
@@ -74,7 +85,9 @@ for level in levels:
     <xqzrect id="level1" x="{}" y="{}" width="{}" height="{}"></xqzrect>""".format(
         level[0], pheight - level[1] - level[3], level[2], level[3]
         )
-    octagon(level)
+    biglevel = (level[0], level[1], level[2], level[3] + 6)
+    octagon(biglevel, "#777")
+    octagon(level, "#333")
 
 
 print """
