@@ -117,16 +117,11 @@ def octagon(x, y, width, height, fill, stroke, stroke_width):
     y3 = y + 2 * height / 3
     y4 = y + height
 
-    #print"""
-    #<rect id="clevel1" x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
-    #""".format(x, y, width, height, fill, stroke, stroke_width)
-
     # starting with x2, y1 we draw this going clockwise around the polygon.
     # starting point was just picked arbitrarily, I chose the leftmost top visible point
     # clockwise is just arbitrary, it just needs to be contiguous
     print """
-      <polyline fill="{}" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
-
+      <polygon fill="{}" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
     """.format(
         fill,
         x2, y1, x3, y1,
@@ -134,7 +129,6 @@ def octagon(x, y, width, height, fill, stroke, stroke_width):
         x3, y4, x2, y4,
         x1, y3, x1, y2
     )
-
     # end of octagon()
 
 
@@ -166,13 +160,9 @@ print """
   """
 
 for clevel in clevels:
-    print """
-    <xqzrect id="clevel1" x="{}" y="{}" width="{}" height="{}"></xqzrect>""".format(
-        clevel[0], pheight - clevel[1] - clevel[3], clevel[2], clevel[3]
-        )
     bigclevel = (clevel[0], clevel[1], clevel[2], clevel[3] + 6)
-    drawlevelbase(bigclevel, "#777")
-    drawlevelbase(clevel, "#222")
+    #drawlevelbase(bigclevel, "#777")
+    #drawlevelbase(clevel, "#222")
     barrier(clevel, "#333")
 
 
@@ -185,8 +175,13 @@ for i in range(5):
     rect(onelevelx - 250, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, "blue", "none", "0")
 
 # draw levels 2 and 5 in octagons to test octagon function
-octagon(twolevelx + 50, twolevely, twolevelw, twolevelh, "green", "red", "5")
-octagon(389       + 50, 1059,      150,       45,        "green", "red", "5")
+#octagon(twolevelx + 50, twolevely, twolevelw, twolevelh, "green", "red", "5")
+#octagon(389       + 50, 1059,      150,       45,        "green", "red", "5")
+
+# draw all levels in octagons
+for i in range(5):
+    octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, "yellow", "none", "0")
+
 
 
 print """
