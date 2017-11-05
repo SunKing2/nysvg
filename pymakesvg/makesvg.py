@@ -6,6 +6,8 @@ onelevelx = 339
 onelevely = 3039
 onelevelw = 250
 onelevelh = 65
+# height of spire supporting level 1 platform
+onelevelwireh = 460
 
 # these are the changes in coordinates for each level in the tower
 # the drawing starts with the bottom platform and add these to get the next platform
@@ -19,7 +21,7 @@ barrierh = 43
 barrierbaseh = 8
 
 
-
+# TODO delete this block of cartesian coordinates
 # the cartesian coordinates of each basket in the WTC tower
 # the program converts cartesian to regular coordinates for SVG
 # x     y      width height
@@ -31,12 +33,6 @@ clevels = [
 (376.5, 3115,  175,  50),
 (389,   3615,  150,  45),
 ]
-
-# TODO delete these 4 lines:
-twolevelx = 351.5
-twolevely = pheight - 2115 - 60
-twolevelw = 225
-twolevelh = 60
 
 twolevelx = onelevelx + deltax
 twolevely = onelevely + deltay
@@ -182,7 +178,20 @@ for i in range(5):
 for i in range(5):
     octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, "yellow", "none", "0")
 
+# draw an ellipse below 1st base where wires meet octagon
+fill = "red"
+stroke = "none"
+stroke_width = "0";
 
+# level 1 wires
+print"""
+<ellipse cx="{}" cy="{}" rx="{}" ry="{}" fill="{}" stroke="{}" stroke-width="{}"></ellipse>
+""".format(onelevelx + onelevelw / 2, onelevely + onelevelh / 2, onelevelw/4, onelevelh /4, fill, stroke, stroke_width)
+print"""
+<rect x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
+""".format(twolevelx + twolevelw / 4, onelevely + onelevelh / 2, twolevelw/2, onelevelwireh, fill, stroke, stroke_width)
+
+# level 2 wires
 
 print """
   </svg>
