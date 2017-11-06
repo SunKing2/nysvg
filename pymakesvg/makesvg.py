@@ -16,6 +16,11 @@ deltay = -495
 deltaw = -25
 deltah = -5
 
+
+# each platform has a fence-like barrier to prevent people from falling off :)
+barrierh = 43
+barrierbaseh = 8
+
 nplatforms = 7
 
 # platforms
@@ -37,34 +42,6 @@ for i in range(nplatforms):
     if i < 3:
         spire = (onelevelx + deltax + (onelevelw + deltaw) / 4, -1, (onelevelw + deltaw) / 2, spire_height)
     spires.append(spire)
-
-
-
-twolevelx = onelevelx + deltax
-twolevely = onelevely + deltay
-twolevelw = onelevelw + deltaw
-twolevelh = onelevelh + deltah
-
-
-
-# each platform has a fence-like barrier to prevent people from falling off :)
-barrierh = 43
-barrierbaseh = 8
-
-
-# TODO delete this block of cartesian coordinates
-# the cartesian coordinates of each basket in the WTC tower
-# the program converts cartesian to regular coordinates for SVG
-# x     y      width height
-# of each of the bottoms of the baskets; drawlevelbase shapes
-clevels = [
-(339,   1615,  250,  65),
-(351.5, 2115,  225,  60),
-(364,   2615,  200,  55),
-(376.5, 3115,  175,  50),
-(389,   3615,  150,  45),
-]
-
 
 
 def barrier(clevel, color):
@@ -153,8 +130,7 @@ def octagon(x, y, width, height, fill, stroke, stroke_width):
     )
     # end of octagon()
 
-# this uses twolevel because width of spire on level 1 and two is the same
-# it seems the width of both spires is more suited for twolevel though, so that's why it's here
+# note: width of spire on level 1 and two is the same
 def spire_for_level(level, spire):
     x = level[0]
     y = level[1]
@@ -199,11 +175,9 @@ print """
   width="928" height="4719"/>
   """
 
-for clevel in clevels:
-    bigclevel = (clevel[0], clevel[1], clevel[2], clevel[3] + 6)
     #drawlevelbase(bigclevel, "#777")
     #drawlevelbase(clevel, "#222")
-    barrier(clevel, "#333")
+    #barrier(clevel, "#333")
 
 
 # draw all levels in octagons
