@@ -1,5 +1,6 @@
 pheight = 4719
 pwidth = 928
+pcenter = pwidth / 2.0
 spire_height = 460
 spire_color = "#283250"
 
@@ -52,6 +53,7 @@ wires = [
 # platforms on WTC tower
 # each level of levels is a 4-tuple of x, y, width, height
 levels = []
+
 spires = []
 for i in range(nplatforms):
     x = onelevelx + i * deltax
@@ -62,10 +64,14 @@ for i in range(nplatforms):
     level = (x, y, width, height)
     levels.append(level)
     # each spire supporting that platform
-    #spires on lower levels have same dimensions
-    spire = (x + width / 4, -1, width / 2, spire_height)
-    if i < 3:
-        spire = (onelevelx + deltax + (onelevelw + deltaw) / 4, -1, (onelevelw + deltaw) / 2, spire_height)
+    # spires on lower levels (0 to 3) have same dimensions
+    # but I'm going to ignore that reality, this looks better!
+    spire_width = width * 0.4  # TODO magic number
+    spire_x = pcenter - spire_width / 2.0
+    modified_spire_height = spire_height
+    if (i == 0):
+        modified_spire_height *= 1.09  # TODO magic number
+    spire = (spire_x, -1, spire_width, modified_spire_height)
     spires.append(spire)
 
 
