@@ -23,6 +23,21 @@ barrierbaseh = 8
 
 nplatforms = 7
 
+platform_underside = "#0a1326"
+
+wire_width = "7";
+wire_stroke = "red"
+wire_y = 3690.38
+wire_out = 286.046
+wire_delta = 24.3
+wire_in = wire_out + wire_delta
+wires = [
+    (wire_out,           wire_y, 0,     pheight),
+    (pwidth - wire_out, wire_y, pwidth, pheight),
+    (wire_in,           wire_y, 0 + wire_delta,     pheight),
+    (pwidth - wire_in, wire_y, pwidth - wire_delta, pheight),
+]
+
 # platforms
 # platforms on WTC tower
 # each level of levels is a 4-tuple of x, y, width, height
@@ -48,7 +63,7 @@ def barrier(clevel, color):
     squarex = clevel[0]
     squarew = clevel[2]
     squareh = clevel[3]
-    squarey = pheight - clevel[1] - squareh
+    squarey = clevel[1]
     x2 = squarex + 1 * squarew / 3
 
     barriery = squarey - barrierbaseh - barrierh
@@ -148,8 +163,13 @@ def spire_for_level(level, spire):
     <rect x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
     """.format(spire_x, spire_y, spire_width, spire_height, fill, stroke, stroke_width)
 
+def draw_wires(wires, fill, stroke, stroke_width):
+    for wire in wires:
+        print """
+            <line x1="{}" y1="{}" x2="{}" y2={}  fill="{}" stroke="{}" stroke-width="{}"></line>
+        """.format(wire[0], wire[1], wire[2], wire[3], fill, stroke, stroke_width)
 
-
+#  ================= end of defs
 
 
 print """
@@ -182,16 +202,21 @@ print """
 
 # draw all levels in octagons
 for i in range(nplatforms):
-    octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, "yellow", "none", "0")
+    octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, platform_underside, "none", "0")
 
 # draw an ellipse below 1st base where wires meet octagon
-# TODO find out what these three lines do
+# TODO find out what these three lines do; later remove them somehow
 fill = spire_color
 stroke = "none"
 stroke_width = "0";
 for i in range(nplatforms):
     spire_for_level(levels[i], spires[i])
 
+# barriers so people don't fall off platform
+for i in range(nplatforms):
+    barrier(levels[i], "yellow") # TODO #333
+
+draw_wires(wires, "none", wire_stroke, wire_width)
 
 print """
   </svg>
