@@ -1,15 +1,6 @@
 pheight = 4719
 pwidth = 928
 
-# x,y, width, height of spires supporting each platform in tower
-spires = [
-    (339, -1, -1, 460),
-    (339, -1, -1, 460),
-    (339, -1, -1, 460),
-    (339, -1, -1, 460),
-    (339, -1, -1, 460)
-]
-
 # coordinates for bottom platform of tower
 onelevelx = 339
 onelevely = 3039
@@ -24,16 +15,28 @@ deltaw = -25
 deltah = -5
 
 
+# platforms
 # platforms on WTC tower
 # each level of levels is a 4-tuple of x, y, width, height
 levels = []
-
 for i in range(5):
     level = (onelevelx + i * deltax,
              onelevely + i * deltay,
              onelevelw + i * deltaw,
              onelevelh + i * deltah)
     levels.append(level)
+
+
+# spires
+# x,y, width, height of spires supporting each platform in tower
+# spires which support level 1 and level 2 have same dimensions
+spires = [
+    (levels[1][0] + levels[1][2] / 4, -1, levels[1][2] / 2, 460),
+    (levels[1][0] + levels[1][2] / 4, -1, levels[1][2] / 2, 460),
+    (levels[2][0] + levels[2][2] / 4, -1, levels[2][2] / 2, 460),
+    (levels[3][0] + levels[3][2] / 4, -1, levels[3][2] / 2, 460),
+    (levels[4][0] + levels[4][2] / 4, -1, levels[4][2] / 2, 460)
+]
 
 
 
@@ -157,6 +160,9 @@ def spire_for_level(level, spire):
     y = level[1]
     width = level[2]
     height = level[3]
+    spire_x = spire[0]
+    spire_y = y + height / 2   # note this overrides any passed y of spire
+    spire_width = spire[2]
     spire_height = spire[3]
 
     print"""
@@ -164,7 +170,7 @@ def spire_for_level(level, spire):
     """.format(x + width / 2, y + height / 2, width/4, height /4, fill, stroke, stroke_width)
     print"""
     <rect x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
-    """.format(twolevelx + twolevelw / 4, y + height / 2, twolevelw/2, spire_height, fill, stroke, stroke_width)
+    """.format(spire_x, spire_y, spire_width, spire_height, fill, stroke, stroke_width)
 
 
 
@@ -217,15 +223,12 @@ for i in range(5):
     octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, "yellow", "none", "0")
 
 # draw an ellipse below 1st base where wires meet octagon
+# TODO find out what these three lines do
 fill = "red"
 stroke = "none"
 stroke_width = "0";
-
-#level1 = (onelevelx, onelevely, onelevelw, onelevelh)
-spire_for_level(levels[0], spires[0])
-
-# level 2 spire
-spire_for_level(levels[1], spires[1])
+for i in range(5):
+    spire_for_level(levels[i], spires[i])
 
 
 print """

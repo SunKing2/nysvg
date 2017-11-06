@@ -1,0 +1,7 @@
+#!/bin/sh
+while inotifywait -qq -e close_write .; do
+    sleep 0.3
+
+    echo  "python makesvg.py > wtcsvg.html"
+    python makesvg.py > wtcsvg.html
+done
