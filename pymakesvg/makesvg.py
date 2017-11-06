@@ -1,6 +1,7 @@
 pheight = 4719
 pwidth = 928
 spire_height = 460
+spire_color = "#283250"
 
 # coordinates for bottom platform of tower
 onelevelx = 339 - 12.5
@@ -205,25 +206,13 @@ for clevel in clevels:
     barrier(clevel, "#333")
 
 
-# draw levels 2 and 5 in rectangles just to see if deltas are working
-rect(twolevelx + 300, twolevely, twolevelw, twolevelh, "red", "green", "5")
-rect(389       + 300, 1059,      150,       45,        "red", "green", "5")
-
-# draw all levels in rectangles on the left to see if sizes are ok
-for i in range(nplatforms):
-    rect(onelevelx - 250, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, "blue", "none", "0")
-
-# draw levels 2 and 5 in octagons to test octagon function
-#octagon(twolevelx + 50, twolevely, twolevelw, twolevelh, "green", "red", "5")
-#octagon(389       + 50, 1059,      150,       45,        "green", "red", "5")
-
 # draw all levels in octagons
 for i in range(nplatforms):
     octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, "yellow", "none", "0")
 
 # draw an ellipse below 1st base where wires meet octagon
 # TODO find out what these three lines do
-fill = "#283250"
+fill = spire_color
 stroke = "none"
 stroke_width = "0";
 for i in range(nplatforms):
