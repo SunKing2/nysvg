@@ -1,13 +1,20 @@
 pheight = 4719
 pwidth = 928
 
+# x,y, width, height of spires supporting each platform in tower
+spires = [
+    (339, -1, -1, 460),
+    (339, -1, -1, 460),
+    (339, -1, -1, 460),
+    (339, -1, -1, 460),
+    (339, -1, -1, 460)
+]
+
 # coordinates for bottom platform of tower
 onelevelx = 339
 onelevely = 3039
 onelevelw = 250
 onelevelh = 65
-# height of spire supporting level 1 platform
-onelevelwireh = 460
 
 # these are the changes in coordinates for each level in the tower
 # the drawing starts with the bottom platform and add these to get the next platform
@@ -15,6 +22,27 @@ deltax = 12.5
 deltay = -495
 deltaw = -25
 deltah = -5
+
+
+# platforms on WTC tower
+# each level of levels is a 4-tuple of x, y, width, height
+levels = []
+
+for i in range(5):
+    level = (onelevelx + i * deltax,
+             onelevely + i * deltay,
+             onelevelw + i * deltaw,
+             onelevelh + i * deltah)
+    levels.append(level)
+
+
+
+twolevelx = onelevelx + deltax
+twolevely = onelevely + deltay
+twolevelw = onelevelw + deltaw
+twolevelh = onelevelh + deltah
+
+
 
 # each platform has a fence-like barrier to prevent people from falling off :)
 barrierh = 43
@@ -33,11 +61,6 @@ clevels = [
 (376.5, 3115,  175,  50),
 (389,   3615,  150,  45),
 ]
-
-twolevelx = onelevelx + deltax
-twolevely = onelevely + deltay
-twolevelw = onelevelw + deltaw
-twolevelh = onelevelh + deltah
 
 
 
@@ -127,6 +150,21 @@ def octagon(x, y, width, height, fill, stroke, stroke_width):
     )
     # end of octagon()
 
+# this uses twolevel because width of spire on level 1 and two is the same
+# it seems the width of both spires is more suited for twolevel though, so that's why it's here
+def spire_for_level(level, spire):
+    x = level[0]
+    y = level[1]
+    width = level[2]
+    height = level[3]
+    spire_height = spire[3]
+
+    print"""
+    <ellipse cx="{}" cy="{}" rx="{}" ry="{}" fill="{}" stroke="{}" stroke-width="{}"></ellipse>
+    """.format(x + width / 2, y + height / 2, width/4, height /4, fill, stroke, stroke_width)
+    print"""
+    <rect x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
+    """.format(twolevelx + twolevelw / 4, y + height / 2, twolevelw/2, spire_height, fill, stroke, stroke_width)
 
 
 
@@ -183,15 +221,12 @@ fill = "red"
 stroke = "none"
 stroke_width = "0";
 
-# level 1 wires
-print"""
-<ellipse cx="{}" cy="{}" rx="{}" ry="{}" fill="{}" stroke="{}" stroke-width="{}"></ellipse>
-""".format(onelevelx + onelevelw / 2, onelevely + onelevelh / 2, onelevelw/4, onelevelh /4, fill, stroke, stroke_width)
-print"""
-<rect x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
-""".format(twolevelx + twolevelw / 4, onelevely + onelevelh / 2, twolevelw/2, onelevelwireh, fill, stroke, stroke_width)
+#level1 = (onelevelx, onelevely, onelevelw, onelevelh)
+spire_for_level(levels[0], spires[0])
 
-# level 2 wires
+# level 2 spire
+spire_for_level(levels[1], spires[1])
+
 
 print """
   </svg>
