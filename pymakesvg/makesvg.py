@@ -176,7 +176,7 @@ def spire_for_level(level, spire):
 def draw_wires(wires, fill, stroke, stroke_width):
     for wire in wires:
         print """
-            <line x1="{}" y1="{}" x2="{}" y2={}  fill="{}" stroke="{}" stroke-width="{}"></line>
+            <line x1="{}" y1="{}" x2="{}" y2="{}"  fill="{}" stroke="{}" stroke-width="{}"></line>
         """.format(wire[0], wire[1], wire[2], wire[3], fill, stroke, stroke_width)
 
 #  ================= end of defs
