@@ -1,11 +1,12 @@
 pheight = 4719
 pwidth = 928
+spire_height = 460
 
 # coordinates for bottom platform of tower
-onelevelx = 339
-onelevely = 3039
-onelevelw = 250
-onelevelh = 65
+onelevelx = 339 - 12.5
+onelevely = 3039 + 495
+onelevelw = 250 + 25
+onelevelh = 65 + 5
 
 # these are the changes in coordinates for each level in the tower
 # the drawing starts with the bottom platform and add these to get the next platform
@@ -14,29 +15,27 @@ deltay = -495
 deltaw = -25
 deltah = -5
 
+nplatforms = 7
 
 # platforms
 # platforms on WTC tower
 # each level of levels is a 4-tuple of x, y, width, height
 levels = []
-for i in range(5):
-    level = (onelevelx + i * deltax,
-             onelevely + i * deltay,
-             onelevelw + i * deltaw,
-             onelevelh + i * deltah)
+spires = []
+for i in range(nplatforms):
+    x = onelevelx + i * deltax
+    y = onelevely + i * deltay
+    width = onelevelw + i * deltaw
+    height = onelevelh + i * deltah
+    # each platform
+    level = (x, y, width, height)
     levels.append(level)
-
-
-# spires
-# x,y, width, height of spires supporting each platform in tower
-# spires which support level 1 and level 2 have same dimensions
-spires = [
-    (levels[1][0] + levels[1][2] / 4, -1, levels[1][2] / 2, 460),
-    (levels[1][0] + levels[1][2] / 4, -1, levels[1][2] / 2, 460),
-    (levels[2][0] + levels[2][2] / 4, -1, levels[2][2] / 2, 460),
-    (levels[3][0] + levels[3][2] / 4, -1, levels[3][2] / 2, 460),
-    (levels[4][0] + levels[4][2] / 4, -1, levels[4][2] / 2, 460)
-]
+    # each spire supporting that platform
+    #spires on lower levels have same dimensions
+    spire = (x + width / 4, -1, width / 2, spire_height)
+    if i < 3:
+        spire = (onelevelx + deltax + (onelevelw + deltaw) / 4, -1, (onelevelw + deltaw) / 2, spire_height)
+    spires.append(spire)
 
 
 
@@ -211,7 +210,7 @@ rect(twolevelx + 300, twolevely, twolevelw, twolevelh, "red", "green", "5")
 rect(389       + 300, 1059,      150,       45,        "red", "green", "5")
 
 # draw all levels in rectangles on the left to see if sizes are ok
-for i in range(5):
+for i in range(nplatforms):
     rect(onelevelx - 250, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, "blue", "none", "0")
 
 # draw levels 2 and 5 in octagons to test octagon function
@@ -219,15 +218,15 @@ for i in range(5):
 #octagon(389       + 50, 1059,      150,       45,        "green", "red", "5")
 
 # draw all levels in octagons
-for i in range(5):
+for i in range(nplatforms):
     octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, "yellow", "none", "0")
 
 # draw an ellipse below 1st base where wires meet octagon
 # TODO find out what these three lines do
-fill = "red"
+fill = "#283250"
 stroke = "none"
 stroke_width = "0";
-for i in range(5):
+for i in range(nplatforms):
     spire_for_level(levels[i], spires[i])
 
 
