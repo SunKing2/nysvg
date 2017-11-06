@@ -31,11 +31,21 @@ wire_y = 3690.38
 wire_out = 286.046
 wire_delta = 24.3
 wire_in = wire_out + wire_delta
+win_out = 394.27
+win_delta = 10.0
+win_bottom = 275.414
+win_in = win_out + win_delta
 wires = [
+    #outer
     (wire_out,           wire_y, 0,     pheight),
     (pwidth - wire_out, wire_y, pwidth, pheight),
     (wire_in,           wire_y, 0 + wire_delta,     pheight),
     (pwidth - wire_in, wire_y, pwidth - wire_delta, pheight),
+    #inner
+    (win_out,           wire_y, win_bottom,     pheight),
+    (pwidth - win_out, wire_y, pwidth - win_bottom, pheight),
+    (win_in,           wire_y, win_bottom + win_delta,     pheight),
+    (pwidth - win_in, wire_y, pwidth - win_bottom - win_delta, pheight),
 ]
 
 # platforms
