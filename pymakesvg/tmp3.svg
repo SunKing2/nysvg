@@ -1,0 +1,110 @@
+<svg width="92.8" height="471.9" viewBox="0 0 928 4719">
+  <image xlink:href="centeringtower5withreflection.png"
+  x="0" y="0"
+  width="928" height="4719"/>
+  
+
+      <polygon fill="#0a1326" points="417.5 3534, 509.5 3534,  601.5 3557, 601.5 3580,    509.5 3604,  417.5, 3604,      326.5 3580,   326.5 3557" />
+    
+
+      <polygon fill="#0a1326" points="422.0 3039, 505.0 3039,  589.0 3060, 589.0 3082,    505.0 3104,  422.0, 3104,      339.0 3082,   339.0 3060" />
+    
+
+      <polygon fill="#0a1326" points="426.5 2544, 501.5 2544,  576.5 2564, 576.5 2584,    501.5 2604,  426.5, 2604,      351.5 2584,   351.5 2564" />
+    
+
+      <polygon fill="#0a1326" points="430.0 2049, 497.0 2049,  564.0 2067, 564.0 2085,    497.0 2104,  430.0, 2104,      364.0 2085,   364.0 2067" />
+    
+
+      <polygon fill="#0a1326" points="434.5 1554, 492.5 1554,  551.5 1570, 551.5 1587,    492.5 1604,  434.5, 1604,      376.5 1587,   376.5 1570" />
+    
+
+      <polygon fill="#0a1326" points="439.0 1059, 489.0 1059,  539.0 1074, 539.0 1089,    489.0 1104,  439.0, 1104,      389.0 1089,   389.0 1074" />
+    
+
+      <polygon fill="#0a1326" points="442.5 564, 484.5 564,  526.5 577, 526.5 590,    484.5 604,  442.5, 604,      401.5 590,   401.5 577" />
+    
+
+    <ellipse cx="463.5" cy="3569" rx="68" ry="17" fill="#283250" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect x="409.0" y="3569" width="110.0" height="501.4" fill="#283250" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse cx="464.0" cy="3071" rx="62" ry="16" fill="#283250" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect x="414.0" y="3071" width="100.0" height="460" fill="#283250" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse cx="463.5" cy="2574" rx="56" ry="15" fill="#283250" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect x="419.0" y="2574" width="90.0" height="460" fill="#283250" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse cx="464.0" cy="2076" rx="50" ry="13" fill="#283250" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect x="424.0" y="2076" width="80.0" height="460" fill="#283250" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse cx="463.5" cy="1579" rx="43" ry="12" fill="#283250" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect x="429.0" y="1579" width="70.0" height="460" fill="#283250" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse cx="464.0" cy="1081" rx="37" ry="11" fill="#283250" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect x="434.0" y="1081" width="60.0" height="460" fill="#283250" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse cx="463.5" cy="584" rx="31" ry="10" fill="#283250" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect x="439.0" y="584" width="50.0" height="460" fill="#283250" stroke="none" stroke-width="0"></rect>
+    
+
+    <rect id="clevel1" x="417.5" y="3483" width="91" height="43" fill="none" stroke="yellow" stroke-width="4px"></rect>
+
+    <rect id="clevel1" x="422.0" y="2988" width="83" height="43" fill="none" stroke="yellow" stroke-width="4px"></rect>
+
+    <rect id="clevel1" x="426.5" y="2493" width="75" height="43" fill="none" stroke="yellow" stroke-width="4px"></rect>
+
+    <rect id="clevel1" x="430.0" y="1998" width="66" height="43" fill="none" stroke="yellow" stroke-width="4px"></rect>
+
+    <rect id="clevel1" x="434.5" y="1503" width="58" height="43" fill="none" stroke="yellow" stroke-width="4px"></rect>
+
+    <rect id="clevel1" x="439.0" y="1008" width="50" height="43" fill="none" stroke="yellow" stroke-width="4px"></rect>
+
+    <rect id="clevel1" x="442.5" y="513" width="41" height="43" fill="none" stroke="yellow" stroke-width="4px"></rect>
+
+            <line x1="286.046" y1="3690.38" x2="0" y2="4719"  fill="none" stroke="red" stroke-width="7"></line>
+        
+
+            <line x1="641.954" y1="3690.38" x2="928" y2="4719"  fill="none" stroke="red" stroke-width="7"></line>
+        
+
+            <line x1="310.346" y1="3690.38" x2="24.3" y2="4719"  fill="none" stroke="red" stroke-width="7"></line>
+        
+
+            <line x1="617.654" y1="3690.38" x2="903.7" y2="4719"  fill="none" stroke="red" stroke-width="7"></line>
+        
+
+            <line x1="394.27" y1="3690.38" x2="275.414" y2="4719"  fill="none" stroke="red" stroke-width="7"></line>
+        
+
+            <line x1="533.73" y1="3690.38" x2="652.586" y2="4719"  fill="none" stroke="red" stroke-width="7"></line>
+        
+
+            <line x1="404.27" y1="3690.38" x2="285.414" y2="4719"  fill="none" stroke="red" stroke-width="7"></line>
+        
+
+            <line x1="523.73" y1="3690.38" x2="642.586" y2="4719"  fill="none" stroke="red" stroke-width="7"></line>
+        
+
+  </svg>
+
+
