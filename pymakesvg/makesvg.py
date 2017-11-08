@@ -144,37 +144,6 @@ def draw_peak(level, color):
     # end of peak()
 
 
-def drawlevelbase(level, color):
-    squarex = level[0]
-    squarew = level[2]
-    squareh = level[3]
-    squarey = pheight - level[1] - squareh
-    x1 = squarex
-    x2 = squarex + 1 * squarew / 3
-    x3 = squarex + 2 * squarew / 3
-    x4 = squarex +     squarew
-
-    y1 = squarey
-    y2 = squarey + 1 * squareh / 3
-    y3 = squarey + 2 * squareh / 3
-    y4 = squarey + squareh
-
-    print """
-      <polyline fill="{}" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
-
-    """.format(
-        color,
-        x2, y1, x3, y1,
-        x4, y2, x4, y3,
-        x3, y4, x2, y4,
-        x1, y3, x1, y2
-    )
-
-    # I really don't know why this line is here
-    print "<".format()
-    # end of drawlevelbase()
-
-
 # draw a svg rectangle by printing out the <rect> code
 def rect(x, y, width, height, fill, stroke, stroke_width):
     print"""
@@ -279,12 +248,6 @@ print """
     #drawlevelbase(biglevel, "#777")
     #drawlevelbase(level, "#222")
     #barrier(level, "#333")
-
-
-# draw all levels in octagons
-# TODO delete me because this will be superceded by draw_platform
-#for i in range(nplatforms):
-#    octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, platform_underside, "none", "0")
 
 
 # draw an ellipse below 1st base where wires meet octagon
