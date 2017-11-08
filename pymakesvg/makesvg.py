@@ -22,6 +22,8 @@ deltah = -5
 barrierh = 43
 barrierbaseh = 8
 
+peakh = 469
+
 nplatforms = 7
 
 platform_underside = "#0a1326"
@@ -58,6 +60,8 @@ spires = []
 for i in range(nplatforms):
     x = onelevelx + i * deltax
     y = onelevely + i * deltay
+    if i == 6:
+        y += 200
     width = onelevelw + i * deltaw
     height = onelevelh + i * deltah
     # each platform
@@ -75,27 +79,71 @@ for i in range(nplatforms):
     spires.append(spire)
 
 
-def barrier(clevel, color):
-    squarex = clevel[0]
-    squarew = clevel[2]
-    squareh = clevel[3]
-    squarey = clevel[1]
+def barrier(level, color):
+    squarex = level[0]
+    squarew = level[2]
+    squareh = level[3]
+    squarey = level[1]
     x2 = squarex + 1 * squarew / 3
 
     barriery = squarey - barrierbaseh - barrierh
     print """
-    <rect id="clevel1" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="{}" stroke-width="4px"></rect>""".format(
+    <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="{}" stroke-width="4px"></rect>""".format(
         x2, barriery, squarew / 3, barrierh,
         color
         )
     # end of barrier()
 
+def draw_peak(level, color):
+    squarex = level[0]
+    squarey = level[1]
+    squarew = level[2]
+    squareh = level[3]
+    # y location of base of peak
+    # this corresponds to y location of top leftmost corner of octagon
+    baseline = squarey + squareh / 3.0
+    baseline_width = .85 * squarew
 
-def drawlevelbase(clevel, color):
-    squarex = clevel[0]
-    squarew = clevel[2]
-    squareh = clevel[3]
-    squarey = pheight - clevel[1] - squareh
+    # the following peak dimensions were determined by eyeballing a picture
+    # I use multiples rather than absolutes to allow for scaling
+    # delete me squareh_multiplier = 14 #12.75
+    peakx = squarex
+    # height of peak is the same as the deltay (the distance between bases of two octagons)
+    peakh = -deltay
+    peaky = baseline - peakh
+    peakw = squarew
+
+    #triangle under peak pointing downwards
+    # center of square vertically is where the triangle starts:
+    tundery = baseline
+    tunderw = squarew * .85
+    tunderx = pcenter - tunderw / 2.0
+    tunderh = tunderw
+    color="blue"
+    print """
+      <polygon fill="{}" points="{} {}, {} {},  {} {}" />
+    """.format(
+        color,
+        tunderx, tundery, tunderx + tunderw, tundery, pcenter, tundery + tunderh
+    )
+
+    color = "green"
+    print """
+      <polygon fill="{}" points="{} {}, {} {},  {} {}" />
+    """.format(
+        color,
+        tunderx, tundery, tunderx + tunderw, tundery, pcenter, tundery - peakh
+    )
+
+
+    # end of peak()
+
+
+def drawlevelbase(level, color):
+    squarex = level[0]
+    squarew = level[2]
+    squareh = level[3]
+    squarey = pheight - level[1] - squareh
     x1 = squarex
     x2 = squarex + 1 * squarew / 3
     x3 = squarex + 2 * squarew / 3
@@ -125,7 +173,7 @@ def drawlevelbase(clevel, color):
 # draw a svg rectangle by printing out the <rect> code
 def rect(x, y, width, height, fill, stroke, stroke_width):
     print"""
-    <rect id="clevel1" x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
+    <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
     """.format(x, y, width, height, fill, stroke, stroke_width)
     # end of #rect()
 
@@ -211,9 +259,9 @@ print """
   width="928" height="4719"/>
   """
 
-    #drawlevelbase(bigclevel, "#777")
-    #drawlevelbase(clevel, "#222")
-    #barrier(clevel, "#333")
+    #drawlevelbase(biglevel, "#777")
+    #drawlevelbase(level, "#222")
+    #barrier(level, "#333")
 
 
 # draw all levels in octagons
@@ -233,6 +281,9 @@ for i in range(nplatforms):
     barrier(levels[i], "yellow") # TODO #333
 
 draw_wires(wires, "none", wire_stroke, wire_width)
+
+peak_level = (levels[6][0], levels[5][1] + deltay, levels[6][2], levels[6][3] )
+draw_peak(peak_level, "red")
 
 print """
   </svg>
