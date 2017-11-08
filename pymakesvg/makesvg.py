@@ -3,6 +3,7 @@ pwidth = 928
 pcenter = pwidth / 2.0
 spire_height = 460
 spire_color = "#283250"
+barrier_color = "yellow"
 
 # coordinates for bottom platform of tower
 onelevelx = 339 - 12.5
@@ -16,6 +17,10 @@ deltax = 12.5
 deltay = -495
 deltaw = -25
 deltah = -5
+
+# all platforms are deltay apart, but
+# top platform is nearer to the previous platform
+deltay_top_level = deltay * .8
 
 
 # each platform has a fence-like barrier to prevent people from falling off :)
@@ -61,7 +66,7 @@ for i in range(nplatforms):
     x = onelevelx + i * deltax
     y = onelevely + i * deltay
     if i == 6:
-        y += 200
+        y -= deltay - deltay_top_level
     width = onelevelw + i * deltaw
     height = onelevelh + i * deltah
     # each platform
@@ -238,7 +243,11 @@ def draw_platform(level, fill, stroke, stroke_width):
     y = level[1]
     width = level[2]
     height = level[3]
+    # base of platform:
     octagon(x, y, width, height, fill, stroke, stroke_width)
+    # barrier so people don't fall off platform :)
+    barrier(level, barrier_color) # TODO #333
+
     # end draw_platform()
 
 #  ================= end of defs
@@ -277,10 +286,6 @@ print """
 #for i in range(nplatforms):
 #    octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, platform_underside, "none", "0")
 
-# draw each platform
-for level in levels:
-    # TODO color should be platform_underside (maybe)
-    draw_platform(level, "red", "none", "0")
 
 # draw an ellipse below 1st base where wires meet octagon
 # TODO find out what these three lines do; later remove them somehow
@@ -290,9 +295,14 @@ stroke_width = "0";
 for i in range(nplatforms):
     spire_for_level(levels[i], spires[i])
 
-# barriers so people don't fall off platform
-for i in range(nplatforms):
-    barrier(levels[i], "yellow") # TODO #333
+# draw each platform
+for level in levels:
+    # TODO color should be platform_underside (maybe)
+    draw_platform(level, "red", "none", "0")
+
+# barriers so people don't fall off platform :)
+#for i in range(nplatforms):
+#    barrier(levels[i], "yellow") # TODO #333
 
 # draw the 8 wires that support the tower at the base
 draw_wires(wires, "none", wire_stroke, wire_width)
