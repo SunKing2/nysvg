@@ -77,10 +77,11 @@ for i in range(nplatforms):
     # but I'm going to ignore that reality, this looks better!
     spire_width = width * 0.4  # TODO magic number
     spire_x = pcenter - spire_width / 2.0
+    spire_y = onelevely + i * deltay + height / 2.0
     modified_spire_height = spire_height
     if (i == 0):
         modified_spire_height *= 1.09  # TODO magic number
-    spire = (spire_x, -1, spire_width, modified_spire_height)
+    spire = (spire_x, spire_y, spire_width, modified_spire_height)
     spires.append(spire)
 
 
@@ -190,7 +191,7 @@ def draw_spire_for_level(level, spire, fill, stroke, stroke_width):
     width = level[2]
     height = level[3]
     spire_x = spire[0]
-    spire_y = y + height / 2   # note this overrides any passed y of spire
+    spire_y = spire[1] # y + height / 2   # note this overrides any passed y of spire
     spire_width = spire[2]
     spire_height = spire[3]
 
@@ -245,9 +246,13 @@ print """
   width="928" height="4719"/>
   """
 
-    #drawlevelbase(biglevel, "#777")
-    #drawlevelbase(level, "#222")
-    #barrier(level, "#333")
+# peak
+# draw shiny silver triangle thingy on top of tower
+# the peak is located at a y where there is usually a platform
+# the y at levels[6] is inconsistent with other levels,
+# so create a tuple like levels[6] but with the same distance as other levels:
+peak_level = (levels[6][0], levels[5][1] + deltay, levels[6][2], levels[6][3] )
+draw_peak(peak_level, "red")
 
 
 for i in range(nplatforms):
@@ -261,11 +266,6 @@ for level in levels:
 
 # draw the 8 wires that support the tower at the base
 draw_wires(wires, "none", wire_stroke, wire_width)
-
-# the y at peak levels[6] is inconsistent with other levels,
-# so create a tuple like levels[6] but with the same distance as other levels:
-peak_level = (levels[6][0], levels[5][1] + deltay, levels[6][2], levels[6][3] )
-draw_peak(peak_level, "red")
 
 print """
   </svg>
