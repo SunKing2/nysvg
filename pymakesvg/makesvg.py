@@ -233,6 +233,14 @@ def draw_wires(wires, fill, stroke, stroke_width):
             <line x1="{}" y1="{}" x2="{}" y2="{}"  fill="{}" stroke="{}" stroke-width="{}"></line>
         """.format(wire[0], wire[1], wire[2], wire[3], fill, stroke, stroke_width)
 
+def draw_platform(level, fill, stroke, stroke_width):
+    x = level[0]
+    y = level[1]
+    width = level[2]
+    height = level[3]
+    octagon(x, y, width, height, fill, stroke, stroke_width)
+    # end draw_platform()
+
 #  ================= end of defs
 
 
@@ -265,8 +273,14 @@ print """
 
 
 # draw all levels in octagons
-for i in range(nplatforms):
-    octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, platform_underside, "none", "0")
+# TODO delete me because this will be superceded by draw_platform
+#for i in range(nplatforms):
+#    octagon(onelevelx + i * deltax, onelevely + i * deltay, onelevelw + i * deltaw, onelevelh + i * deltah, platform_underside, "none", "0")
+
+# draw each platform
+for level in levels:
+    # TODO color should be platform_underside (maybe)
+    draw_platform(level, "red", "none", "0")
 
 # draw an ellipse below 1st base where wires meet octagon
 # TODO find out what these three lines do; later remove them somehow
@@ -280,8 +294,11 @@ for i in range(nplatforms):
 for i in range(nplatforms):
     barrier(levels[i], "yellow") # TODO #333
 
+# draw the 8 wires that support the tower at the base
 draw_wires(wires, "none", wire_stroke, wire_width)
 
+# the y at peak levels[6] is inconsistent with other levels,
+# so create a tuple like levels[6] but with the same distance as other levels:
 peak_level = (levels[6][0], levels[5][1] + deltay, levels[6][2], levels[6][3] )
 draw_peak(peak_level, "red")
 
