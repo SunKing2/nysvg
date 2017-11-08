@@ -184,7 +184,7 @@ def octagon(x, y, width, height, fill, stroke, stroke_width):
     # end of octagon()
 
 # note: width of spire on level 1 and two is the same
-def spire_for_level(level, spire):
+def draw_spire_for_level(level, spire, fill, stroke, stroke_width):
     x = level[0]
     y = level[1]
     width = level[2]
@@ -250,22 +250,14 @@ print """
     #barrier(level, "#333")
 
 
-# draw an ellipse below 1st base where wires meet octagon
-# TODO find out what these three lines do; later remove them somehow
-fill = spire_color
-stroke = "none"
-stroke_width = "0";
 for i in range(nplatforms):
-    spire_for_level(levels[i], spires[i])
+    draw_spire_for_level(levels[i], spires[i], spire_color, "none", "0")
 
 # draw each platform
 for level in levels:
     # TODO color should be platform_underside (maybe)
     draw_platform(level, "red", "none", "0")
 
-# barriers so people don't fall off platform :)
-#for i in range(nplatforms):
-#    barrier(levels[i], "yellow") # TODO #333
 
 # draw the 8 wires that support the tower at the base
 draw_wires(wires, "none", wire_stroke, wire_width)
