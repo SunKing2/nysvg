@@ -56,19 +56,20 @@ platform_color = sil_color # "#0a1326"
 
 subplatform_color = sil_color #"green"
 
-wire_width = "7";
+wire_width = 7;
 wire_stroke = sil_color #"red"
 wire_y = 3690.38
 wire_out = 286.046
 wire_delta = 24.3
 wire_in = wire_out + wire_delta
+#win is the inner set of wires
 win_out = 394.27
 win_delta = 10.0
 win_bottom = 275.414
 win_in = win_out + win_delta
 wires = [
     #outer
-    (wire_out,           wire_y, 0,     p_height),
+    (wire_out,           wire_y, 0 - 13.94,     p_height + 50.14),
     (p_width - wire_out, wire_y, p_width, p_height),
     (wire_in,           wire_y, 0 + wire_delta,     p_height),
     (p_width - wire_in, wire_y, p_width - wire_delta, p_height),
@@ -241,11 +242,41 @@ def draw_spire_for_level(level, spire, fill, stroke, stroke_width):
     <rect x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
     """.format(spire_x, spire_y, spire_width, spire_height, fill, stroke, stroke_width)
 
+# draw a line, that goes up and down at any angle but first x is leftmost part
+# width is exactly path_width all of entire line, as next node is directly horizontal right
+# line is tuple of (x1, y1, x2, y2)
+def angled_line_v(line, path_width, fill, stroke, stroke_width):
+    # clockwise starting at top left point (which is x)
+    print """
+        <path d="M {} {} l{} 0 L {} {} l-{} 0 z "  fill="{}" stroke="{}" stroke-width="{}"></line>
+    """.format(line[0], line[1], path_width, line[2] + path_width, line[3], path_width, fill, stroke, stroke_width)
+
 def draw_wires(wires, fill, stroke, stroke_width):
     for wire in wires:
         print """
-            <line x1="{}" y1="{}" x2="{}" y2="{}"  fill="{}" stroke="{}" stroke-width="{}"></line>
+              <line x1="{}" y1="{}" x2="{}" y2="{}"  fill="{}" stroke="{}" stroke-width="{}"></line>
         """.format(wire[0], wire[1], wire[2], wire[3], fill, stroke, stroke_width)
+
+    # rest of code is new transform version with paths not lines
+    # TODO remove this line for wire_color
+    wire_color = "red"
+    wire = wires[0]
+    print """
+        <g id="wire_out">
+        """
+    angled_line_v(wires[0], wire_width, wire_color, "none", "0")
+    print """
+        </g>
+    """
+    print """
+        <use xlink:href="#wire_out" transform="translate({}, 0)"/>
+    """.format(wire_delta)
+    print """
+        <use xlink:href="#wire_out" transform="translate({}, 0) scale(-1, 1)"/>
+    """.format(p_width - 1)
+    print """
+        <use xlink:href="#wire_out" transform="translate({}, 0) scale(-1, 1)"/>
+    """.format(p_width - 1 - wire_delta)
 
 def draw_platform(level, fill, stroke, stroke_width):
     x = level[0]
@@ -339,7 +370,7 @@ print """
 
 
   <svg width="92.8" height="471.9" viewBox="0 0 928 4719">
-  <image xlink:href="xqzxzcenteringtower5withreflection.png"
+  <image xlink:href="centeringtower5withreflection.png"
   x="0" y="0"
   width="928" height="4719"/>
   """
