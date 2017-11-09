@@ -2,15 +2,13 @@ pheight = 4719
 pwidth = 928
 pcenter = pwidth / 2.0
 
-barrier_color = "yellow"
-
 # coordinates for bottom platform of tower
 onelevelx = 339 - 12.5
 onelevely = 3039 + 495
 onelevelw = 250 + 25
 onelevelh = 65 + 5
 
-spire_height = 460
+spire_height = 465
 # a spire's width is the platform's width * spire_width_multiplier
 spire_width_multiplier = 0.4
 spire_taper_top_y = onelevely + onelevelh / 2.0 + spire_height * 1.09
@@ -32,12 +30,13 @@ deltah = -5
 
 # all platforms are deltay apart, but
 # top platform is nearer to the previous platform
-deltay_top_level = deltay * .8
+deltay_top_level = deltay * .75
 
 
 # each platform has a fence-like barrier to prevent people from falling off :)
-barrierh = 43
-barrierbaseh = 8
+barrier_height = 43
+barrier_base_height = 8
+barrier_color = "yellow"  # TODO #333
 
 peakh = 469
 
@@ -99,45 +98,60 @@ for i in range(nplatforms):
     spires.append(spire)
 
 
-def barrier(level, color):
-    squarex = level[0]
-    squarew = level[2]
-    squareh = level[3]
-    squarey = level[1]
-    x2 = squarex + 1 * squarew / 3
+def draw_barrier(level, fill, stroke, stroke_width):
+    square_x = level[0]
+    square_width = level[2]
+    square_height = level[3]
+    square_y = level[1]
+    x2 = square_x + 1 * square_width / 3.0
+    x3 = square_x + 2 * square_width / 3.0
+    x4 = square_x + square_width
 
-    barriery = squarey - barrierbaseh - barrierh
+    barrier_y = square_y - barrier_base_height - barrier_height
+    y2 = barrier_y + barrier_height + square_height / 3.0
     print """
     <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="{}" stroke-width="4px"></rect>""".format(
-        x2, barriery, squarew / 3, barrierh,
-        color
+        x2, barrier_y, square_width / 3.0, barrier_height,
+        fill
         )
-    # end of barrier()
+    # draw perimeter of barrier
+    print """
+    <polygon fill="none" stroke="{}" stroke-width="4" points="{} {} {} {}   {} {} {} {}  {} {} {} {}  {} {} {} {}"/>
+    """.format(barrier_color,
+               square_x, y2, square_x, y2 - barrier_height,
+               x2, barrier_y, x3, barrier_y,
+               x4, y2 - barrier_height, x4, y2,
+               x3, barrier_y + barrier_height, x2, barrier_y + barrier_height,
 
-def draw_peak(level, color):
-    squarex = level[0]
-    squarey = level[1]
-    squarew = level[2]
-    squareh = level[3]
+               )
+
+    # end of draw_barrier()
+
+def draw_peak(level, fill, stroke, stroke_width):
+    color = fill
+    square_x = level[0]
+    square_y = level[1]
+    square_w = level[2]
+    square_height = level[3]
     # y location of base of peak
     # this corresponds to y location of top leftmost corner of octagon
-    baseline = squarey + squareh / 3.0
+    baseline = square_y + square_height / 3.0
     # TODO this looks like a magic number
-    baseline_width = .85 * squarew
+    baseline_width = .85 * square_w
 
     # the following peak dimensions were determined by eyeballing a picture
     # I use multiples rather than absolutes to allow for scaling
-    # delete me squareh_multiplier = 14 #12.75
-    peakx = squarex
+    # delete me square_height_multiplier = 14 #12.75
+    peakx = square_x
     # height of peak is the same as the deltay (the distance between bases of two octagons)
     peakh = -deltay
     peaky = baseline - peakh
-    peakw = squarew
+    peakw = square_w
 
     #triangle under peak pointing downwards
     # center of square vertically is where the triangle starts:
     tundery = baseline
-    tunderw = squarew * .85
+    tunderw = square_w * .85
     tunderx = pcenter - tunderw / 2.0
     tunderh = tunderw
     color="blue"
@@ -228,10 +242,15 @@ def draw_platform(level, fill, stroke, stroke_width):
     y = level[1]
     width = level[2]
     height = level[3]
-    # base of platform:
+
+    # draw the part between bottom of barrier and the platform underside octagon
+    octagon(x, y - barrier_base_height, width, height, "blue", stroke, stroke_width)
+
+    # draw platform base, i.e. the underside octagon of the platform
     octagon(x, y, width, height, fill, stroke, stroke_width)
+
     # barrier so people don't fall off platform :)
-    barrier(level, barrier_color) # TODO #333
+    draw_barrier(level, barrier_color, "none", "0")
     # end draw_platform()
 
 # 8 sided polygon that is not an octagon.  Ugly?  yes!
@@ -321,7 +340,7 @@ print """
 # the y at levels[6] is inconsistent with other levels,
 # so create a tuple like levels[6] but with the same distance as other levels:
 peak_level = (levels[6][0], levels[5][1] + deltay, levels[6][2], levels[6][3] )
-draw_peak(peak_level, "red")
+draw_peak(peak_level, "red", "none", "0")
 
 
 for i in range(nplatforms):

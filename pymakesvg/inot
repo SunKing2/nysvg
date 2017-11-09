@@ -4,4 +4,5 @@ while inotifywait -qq -e close_write .; do
 
     echo  "python makesvg.py > wtcsvg.html"
     python makesvg.py > wtcsvg.html
+    cat wtcsvg.html | tail -n +18 | head -n -4  > wtcsvg.svg
 done

@@ -1,20 +1,3 @@
-
-<html>
-<head>
-  <style>
-  body {
-    background-color : #ebbfbd;
-  }
-  .yellow {
-    background-color : yellow;
-  }
-  </style>
-</head>
-<body>
-  <svg class="yellow" width=500 height="10">
-  </svg>
-
-
   <svg width="92.8" height="471.9" viewBox="0 0 928 4719">
   <image xlink:href="centeringtower5withreflection.png"
   x="0" y="0"
@@ -177,7 +160,3 @@
     
 
   </svg>
-</body>
-</html>
-
-
