@@ -251,6 +251,19 @@ def angled_line_v(line, path_width, fill, stroke, stroke_width):
         <path d="M {} {} l{} 0 L {} {} l-{} 0 z "  fill="{}" stroke="{}" stroke-width="{}"></line>
     """.format(line[0], line[1], path_width, line[2] + path_width, line[3], path_width, fill, stroke, stroke_width)
 
+def draw_wire_partner_and_reflection(group_id, wire, delta_x, fill, stroke, stroke_width):
+    # outer wire left
+    print "<g id=\"{}\">".format(group_id)
+    angled_line_v(wire, wire_width, fill, "none", "0")
+    # right of outer wire left, outer wire right, left of outer wire right
+    print """
+        </g>
+        <use xlink:href="#{}" transform="translate({}, 0)"/>
+        <use xlink:href="#{}" transform="translate({}, 0) scale(-1, 1)"/>
+        <use xlink:href="#{}" transform="translate({}, 0) scale(-1, 1)"/>
+    """.format(group_id, delta_x, group_id, p_width - 1, group_id, p_width - 1 - delta_x)
+
+
 def draw_wires(wires, fill, stroke, stroke_width):
     for wire in wires:
         print """
@@ -260,19 +273,8 @@ def draw_wires(wires, fill, stroke, stroke_width):
     # rest of code is new transform version with paths not lines
     # TODO remove this line for wire_color
     wire_color = "red"
-    wire = wires[0]
-    # outer wire left
-    print """
-        <g id="wire_out">
-        """
-    angled_line_v(wires[0], wire_width, wire_color, "none", "0")
-    # right of outer wire left, outer wire right, left of outer wire right
-    print """
-        </g>
-        <use xlink:href="#wire_out" transform="translate({}, 0)"/>
-        <use xlink:href="#wire_out" transform="translate({}, 0) scale(-1, 1)"/>
-        <use xlink:href="#wire_out" transform="translate({}, 0) scale(-1, 1)"/>
-    """.format(wire_delta, p_width - 1, p_width - 1 - wire_delta)
+    draw_wire_partner_and_reflection("wire_out", wires[0], wire_delta, wire_color, "none", "0")
+    draw_wire_partner_and_reflection("wire_in",  wires[4], win_delta,  wire_color, "none", "0")
 
 def draw_platform(level, fill, stroke, stroke_width):
     x = level[0]
