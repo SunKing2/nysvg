@@ -7,13 +7,13 @@
       <polygon fill="black" points="410.875 577.333333333, 517.125 577.333333333,  464.0 683.583333333" />
     
 
-      <polygon fill="black" points="410.875 577.333333333, 517.125 577.333333333,  464.0 82.3333333333" />
+      <polygon fill="black" points="410.875 578.333333333, 517.125 578.333333333,  464.0 82.3333333333" />
     
 
     <ellipse cx="463.5" cy="3569" rx="68" ry="17" fill="black" stroke="none" stroke-width="0"></ellipse>
     
 
-    <rect x="409.0" y="3569.0" width="110.0" height="506.85" fill="black" stroke="none" stroke-width="0"></rect>
+    <rect x="409.0" y="3569.0" width="110.0" height="557.535" fill="black" stroke="none" stroke-width="0"></rect>
     
 
     <ellipse cx="464.0" cy="3071" rx="62" ry="16" fill="black" stroke="none" stroke-width="0"></ellipse>
@@ -76,7 +76,7 @@
             <line x1="523.73" y1="3690.38" x2="642.586" y2="4719"  fill="none" stroke="black" stroke-width="7"></line>
         
 
-      <polygon fill="black" points="417.5 3534, 509.5 3534,  601.5 3557, 646.954 3685.38,    509.5 3744,  417.5, 3744,      281.046 3685.38,   326.5 3557" />
+      <polygon fill="black" points="417.5 3534, 509.5 3534,  601.5 3557, 648.954 3695.38,    509.5 3744,  417.5, 3744,      279.046 3695.38,   326.5 3557" />
     
 
       <polygon fill="#666" points="417.5 3526, 509.5 3526,  601.5 3549, 601.5 3572,    509.5 3596,  417.5, 3596,      326.5 3572,   326.5 3549" />

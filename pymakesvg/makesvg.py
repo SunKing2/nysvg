@@ -10,10 +10,12 @@ onelevely = 3039 + 495
 onelevelw = 250 + 25
 onelevelh = 65 + 5
 
+# spire below 0th platform is taller
+spire_zero_multiplier = 1.09
 spire_height = 465
 # a spire's width is the platform's width * spire_width_multiplier
 spire_width_multiplier = 0.4
-spire_taper_top_y = onelevely + onelevelh / 2.0 + spire_height * 1.09
+spire_taper_top_y = onelevely + onelevelh / 2.0 + spire_height * spire_zero_multiplier
 spire_taper_top_width = onelevelw * spire_width_multiplier
 spire_taper_height = spire_height * .73609
 spire_taper_middle_y = spire_taper_top_y + spire_taper_height
@@ -101,7 +103,9 @@ for i in range(nplatforms):
     spire_y = onelevely + i * deltay + height / 2.0
     modified_spire_height = spire_height
     if (i == 0):
-        modified_spire_height *= 1.09  # TODO magic number
+        # 1.1 is to make it a bit taller than it is supposed to be
+        # so that there is no spaces between it and the taper spire below it
+        modified_spire_height *= spire_zero_multiplier * 1.1
     spire = (spire_x, spire_y, spire_width, modified_spire_height)
     spires.append(spire)
 
@@ -174,7 +178,7 @@ def draw_peak(level, fill, stroke, stroke_width):
       <polygon fill="{}" points="{} {}, {} {},  {} {}" />
     """.format(
         peak_color,
-        tunderx, tundery, tunderx + tunderw, tundery, pcenter, tundery - peakh
+        tunderx, tundery + 1, tunderx + tunderw, tundery + 1, pcenter, tundery - peakh
     )
 
 
@@ -272,16 +276,16 @@ def draw_subplatform(level, fill, stroke, stroke_width):
     #       x1, y2                    x4, y2
     #x0, y3                                 x5, y3
     #               x2, y4   x3, y4
-    x0 = wire_out - 5  # wire
+    x0 = wire_out - 7  # wire
     x1 = x
     x2 = x + 1 * width / 3
     x3 = x + 2 * width / 3
     x4 = x +     width
-    x5 = pwidth - wire_out + 5 # wire
+    x5 = pwidth - wire_out + 7 # wire
 
     y1 = y
     y2 = y + 1 * height / 3
-    y3 = wire_y - 5 #wire
+    y3 = wire_y + 5 #wire
     y4 = y + height * 3
 
     # starting with x2, y1 we draw this going clockwise around the polygon.
