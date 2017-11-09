@@ -57,20 +57,15 @@ platform_color = sil_color # "#0a1326"
 subplatform_color = sil_color #"green"
 
 wire_width = 7;
-wire_color = sil_color #"red"
-wire_x = 286.046
-wire_y = 3690.38
-wire_x2 = -13.94
-wire_y2 = p_height + 50.14
 wire_delta = 24.3  # distance between this wire and next one
-#win is the inner set of wires
-win_out = 394.27
-win_delta = 10.0
-win_bottom = 275.414
+win_delta = 17.0   # distance between inner wires
+wire_color = sil_color #"red"
+wire_y = 3690.38
+wire_y2 = p_height + 50.14
 # outer wire, inner wire
 wires = [
-    (wire_x,           wire_y, wire_x2, wire_y2),
-    (win_out,           wire_y, win_bottom,     p_height),
+    (286, wire_y, -20, wire_y2),
+    (380, wire_y, 275, wire_y2),
 ]
 
 # platforms
@@ -285,12 +280,12 @@ def draw_subplatform(level, fill, stroke, stroke_width):
     #       x1, y2                    x4, y2
     #x0, y3                                 x5, y3
     #               x2, y4   x3, y4
-    x0 = wire_x - wire_width  # wire
+    x0 = wires[0][0] - wire_width  # wire
     x1 = x
     x2 = x + 1 * width / 3
     x3 = x + 2 * width / 3
     x4 = x +     width
-    x5 = p_width - wire_x + 7 # wire
+    x5 = p_width - wires[0][0] + wire_width # wire
 
     y1 = y
     y2 = y + 1 * height / 3
