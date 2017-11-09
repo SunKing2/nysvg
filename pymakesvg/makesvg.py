@@ -2,6 +2,8 @@ pheight = 4719
 pwidth = 928
 pcenter = pwidth / 2.0
 
+sil_color = "black"
+
 # coordinates for bottom platform of tower
 onelevelx = 339 - 12.5
 onelevely = 3039 + 495
@@ -18,7 +20,9 @@ spire_taper_middle_y = spire_taper_top_y + spire_taper_height
 spire_taper_middle_width = spire_taper_top_width * 1.86364
 # this .75 is just arbitrary, change it to what looks good:
 spire_taper_bottom_height = spire_height * .75
-spire_color = "#283250"
+spire_color = sil_color # "#283250"
+
+tapered_base_color = sil_color
 
 
 # these are the changes in coordinates for each level in the tower
@@ -36,18 +40,22 @@ deltay_top_level = deltay * .75
 # each platform has a fence-like barrier to prevent people from falling off :)
 barrier_height = 43
 barrier_base_height = 8
-barrier_color = "yellow"  # TODO #333
+barrier_color = "#666" #"yellow"  # TODO #333
+barrier_base_color = barrier_color # "green"
 
 peakh = 469
+peak_color = sil_color # "blue"
+subpeak_color = sil_color # "yellow"
 
 nplatforms = 7
 
-platform_underside = "#0a1326"
+#underside of octagon base
+platform_color = sil_color # "#0a1326"
 
-subplatform_color = "green"
+subplatform_color = sil_color #"green"
 
 wire_width = "7";
-wire_stroke = "red"
+wire_stroke = sil_color #"red"
 wire_y = 3690.38
 wire_out = 286.046
 wire_delta = 24.3
@@ -154,19 +162,18 @@ def draw_peak(level, fill, stroke, stroke_width):
     tunderw = square_w * .85
     tunderx = pcenter - tunderw / 2.0
     tunderh = tunderw
-    color="blue"
     print """
       <polygon fill="{}" points="{} {}, {} {},  {} {}" />
     """.format(
-        color,
+        subpeak_color,
         tunderx, tundery, tunderx + tunderw, tundery, pcenter, tundery + tunderh
     )
 
-    color = "green"
+    # peak (triangle shape)
     print """
       <polygon fill="{}" points="{} {}, {} {},  {} {}" />
     """.format(
-        color,
+        peak_color,
         tunderx, tundery, tunderx + tunderw, tundery, pcenter, tundery - peakh
     )
 
@@ -244,7 +251,7 @@ def draw_platform(level, fill, stroke, stroke_width):
     height = level[3]
 
     # draw the part between bottom of barrier and the platform underside octagon
-    octagon(x, y - barrier_base_height, width, height, "blue", stroke, stroke_width)
+    octagon(x, y - barrier_base_height, width, height, barrier_base_color, stroke, stroke_width)
 
     # draw platform base, i.e. the underside octagon of the platform
     octagon(x, y, width, height, fill, stroke, stroke_width)
@@ -265,16 +272,16 @@ def draw_subplatform(level, fill, stroke, stroke_width):
     #       x1, y2                    x4, y2
     #x0, y3                                 x5, y3
     #               x2, y4   x3, y4
-    x0 = wire_out
+    x0 = wire_out - 5  # wire
     x1 = x
     x2 = x + 1 * width / 3
     x3 = x + 2 * width / 3
     x4 = x +     width
-    x5 = pwidth - wire_out
+    x5 = pwidth - wire_out + 5 # wire
 
     y1 = y
     y2 = y + 1 * height / 3
-    y3 = wire_y
+    y3 = wire_y - 5 #wire
     y4 = y + height * 3
 
     # starting with x2, y1 we draw this going clockwise around the polygon.
@@ -329,7 +336,7 @@ print """
 
 
   <svg width="92.8" height="471.9" viewBox="0 0 928 4719">
-  <image xlink:href="centeringtower5withreflection.png"
+  <image xlink:href="xqzxzcenteringtower5withreflection.png"
   x="0" y="0"
   width="928" height="4719"/>
   """
@@ -346,19 +353,18 @@ draw_peak(peak_level, "red", "none", "0")
 for i in range(nplatforms):
     draw_spire_for_level(levels[i], spires[i], spire_color, "none", "0")
 
-# draw each platform
-for level in levels:
-    # TODO color should be platform_underside (maybe)
-    draw_platform(level, "red", "none", "0")
-
-
 # draw the 8 wires that support the tower at the base
 draw_wires(wires, "none", wire_stroke, wire_width)
 
-draw_subplatform(levels[0], "green", "none", "0")
+draw_subplatform(levels[0], subplatform_color, "none", "0")
 
-draw_big_fat_base(spire_taper_top_y, spire_taper_top_width, spire_taper_middle_y, spire_taper_middle_width, spire_taper_bottom_height, "blue", "none", "0")
-#draw_big_fat_base(spire_taper_top_y, 20, 340, 40, 200, "blue", "none", "0")
+# draw each platform
+for level in levels:
+    # TODO color should be platform_underside (maybe)
+    draw_platform(level, platform_color, "none", "0")
+
+
+draw_big_fat_base(spire_taper_top_y, spire_taper_top_width, spire_taper_middle_y, spire_taper_middle_width, spire_taper_bottom_height, tapered_base_color, "none", "0")
 
 print """
   </svg>
