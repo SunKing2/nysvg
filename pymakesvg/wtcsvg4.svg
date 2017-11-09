@@ -1,20 +1,3 @@
-
-<html>
-<head>
-  <style>
-  body {
-    background-color : #ebbfbd;
-  }
-  .yellow {
-    background-color : yellow;
-  }
-  </style>
-</head>
-<body>
-  <svg class="yellow" width=500 height="10">
-  </svg>
-
-
   <svg width="92.8" height="471.9" viewBox="0 0 928 4719">
   <image xlink:href="centeringtower5withreflection.png"
   x="0" y="0"
@@ -128,14 +111,5 @@
             <line x1="523.73" y1="3690.38" x2="642.586" y2="4719"  fill="none" stroke="red" stroke-width="7"></line>
         
 
-      <polygon fill="green" points="417.5 3534, 509.5 3534,  601.5 3557, 641.954 3690.38,    509.5 3744,  417.5, 3744,      286.046 3690.38,   326.5 3557" />
-    
-
-      <polygon fill="blue" points="519.0 4070.4, 566.5002 4409.0014,  566.5002 4754.0014, 361.4998 4754.0014,  361.4998 4409.0014, 409.0 4070.4" />
-    
-
   </svg>
-</body>
-</html>
-
 

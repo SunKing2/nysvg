@@ -1,8 +1,7 @@
 pheight = 4719
 pwidth = 928
 pcenter = pwidth / 2.0
-spire_height = 460
-spire_color = "#283250"
+
 barrier_color = "yellow"
 
 # coordinates for bottom platform of tower
@@ -10,6 +9,19 @@ onelevelx = 339 - 12.5
 onelevely = 3039 + 495
 onelevelw = 250 + 25
 onelevelh = 65 + 5
+
+spire_height = 460
+# a spire's width is the platform's width * spire_width_multiplier
+spire_width_multiplier = 0.4
+spire_taper_top_y = onelevely + onelevelh / 2.0 + spire_height * 1.09
+spire_taper_top_width = onelevelw * spire_width_multiplier
+spire_taper_height = spire_height * .73609
+spire_taper_middle_y = spire_taper_top_y + spire_taper_height
+spire_taper_middle_width = spire_taper_top_width * 1.86364
+# this .75 is just arbitrary, change it to what looks good:
+spire_taper_bottom_height = spire_height * .75
+spire_color = "#283250"
+
 
 # these are the changes in coordinates for each level in the tower
 # the drawing starts with the bottom platform and add these to get the next platform
@@ -32,6 +44,8 @@ peakh = 469
 nplatforms = 7
 
 platform_underside = "#0a1326"
+
+subplatform_color = "green"
 
 wire_width = "7";
 wire_stroke = "red"
@@ -75,7 +89,7 @@ for i in range(nplatforms):
     # each spire supporting that platform
     # spires on lower levels (0 to 3) have same dimensions
     # but I'm going to ignore that reality, this looks better!
-    spire_width = width * 0.4  # TODO magic number
+    spire_width = width * spire_width_multiplier
     spire_x = pcenter - spire_width / 2.0
     spire_y = onelevely + i * deltay + height / 2.0
     modified_spire_height = spire_height
@@ -108,6 +122,7 @@ def draw_peak(level, color):
     # y location of base of peak
     # this corresponds to y location of top leftmost corner of octagon
     baseline = squarey + squareh / 3.0
+    # TODO this looks like a magic number
     baseline_width = .85 * squarew
 
     # the following peak dimensions were determined by eyeballing a picture
@@ -217,8 +232,62 @@ def draw_platform(level, fill, stroke, stroke_width):
     octagon(x, y, width, height, fill, stroke, stroke_width)
     # barrier so people don't fall off platform :)
     barrier(level, barrier_color) # TODO #333
-
     # end draw_platform()
+
+# 8 sided polygon that is not an octagon.  Ugly?  yes!
+def draw_subplatform(level, fill, stroke, stroke_width):
+    x = level[0]
+    y = level[1]
+    width = level[2]
+    height = level[3]
+    # the polygon coordinates like octagon
+    #TODO delete these 4 lines of comment
+    #               x2, y1   x3, y1
+    #       x1, y2                    x4, y2
+    #x0, y3                                 x5, y3
+    #               x2, y4   x3, y4
+    x0 = wire_out
+    x1 = x
+    x2 = x + 1 * width / 3
+    x3 = x + 2 * width / 3
+    x4 = x +     width
+    x5 = pwidth - wire_out
+
+    y1 = y
+    y2 = y + 1 * height / 3
+    y3 = wire_y
+    y4 = y + height * 3
+
+    # starting with x2, y1 we draw this going clockwise around the polygon.
+    print """
+      <polygon fill="{}" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
+    """.format(
+        fill,
+        x2, y1, x3, y1,
+        x4, y2, x5, y3,
+        x3, y4, x2, y4,
+        x0, y3, x1, y2
+    )
+    #end of draw_subplatform
+
+# shape of house roof plus house walls  (flat on top)
+# sort of like two parts: top sloping part, and bottom rectangle
+def draw_big_fat_base(top_y, top_width, middle_y, middle_width, bottom_height, fill, stroke, stroke_width):
+    top_right_x = pcenter + top_width / 2.0
+    top_left_x  = pcenter - top_width / 2.0
+    middle_right_x = pcenter + middle_width / 2.0
+    middle_left_x  = pcenter - middle_width / 2.0
+    bottom_right_x = middle_right_x
+    bottom_left_x  = middle_left_x
+    bottom_y = middle_y + bottom_height
+    print """
+      <polygon fill="{}" points="{} {}, {} {},  {} {}, {} {},  {} {}, {} {}" />
+    """.format(
+        fill,
+        top_right_x, top_y,     middle_right_x, middle_y,     bottom_right_x, bottom_y,
+        bottom_left_x, bottom_y, middle_left_x, middle_y,      top_left_x, top_y
+    )
+    #end draw_big_fat_base
 
 #  ================= end of defs
 
@@ -266,6 +335,11 @@ for level in levels:
 
 # draw the 8 wires that support the tower at the base
 draw_wires(wires, "none", wire_stroke, wire_width)
+
+draw_subplatform(levels[0], "green", "none", "0")
+
+draw_big_fat_base(spire_taper_top_y, spire_taper_top_width, spire_taper_middle_y, spire_taper_middle_width, spire_taper_bottom_height, "blue", "none", "0")
+#draw_big_fat_base(spire_taper_top_y, 20, 340, 40, 200, "blue", "none", "0")
 
 print """
   </svg>
