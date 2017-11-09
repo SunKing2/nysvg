@@ -57,27 +57,20 @@ platform_color = sil_color # "#0a1326"
 subplatform_color = sil_color #"green"
 
 wire_width = 7;
-wire_stroke = sil_color #"red"
+wire_color = sil_color #"red"
+wire_x = 286.046
 wire_y = 3690.38
-wire_out = 286.046
-wire_delta = 24.3
-wire_in = wire_out + wire_delta
+wire_x2 = -13.94
+wire_y2 = p_height + 50.14
+wire_delta = 24.3  # distance between this wire and next one
 #win is the inner set of wires
 win_out = 394.27
 win_delta = 10.0
 win_bottom = 275.414
-win_in = win_out + win_delta
+# outer wire, inner wire
 wires = [
-    #outer
-    (wire_out,           wire_y, 0 - 13.94,     p_height + 50.14),
-    (p_width - wire_out, wire_y, p_width, p_height),
-    (wire_in,           wire_y, 0 + wire_delta,     p_height),
-    (p_width - wire_in, wire_y, p_width - wire_delta, p_height),
-    #inner
+    (wire_x,           wire_y, wire_x2, wire_y2),
     (win_out,           wire_y, win_bottom,     p_height),
-    (p_width - win_out, wire_y, p_width - win_bottom, p_height),
-    (win_in,           wire_y, win_bottom + win_delta,     p_height),
-    (p_width - win_in, wire_y, p_width - win_bottom - win_delta, p_height),
 ]
 
 # platforms
@@ -264,18 +257,6 @@ def draw_wire_partner_and_reflection(group_id, wire, delta_x, fill, stroke, stro
     """.format(group_id, delta_x, group_id, p_width - 1, group_id, p_width - 1 - delta_x)
 
 
-def draw_wires(wires, fill, stroke, stroke_width):
-    for wire in wires:
-        print """
-              <line x1="{}" y1="{}" x2="{}" y2="{}"  fill="{}" stroke="{}" stroke-width="{}"></line>
-        """.format(wire[0], wire[1], wire[2], wire[3], fill, stroke, stroke_width)
-
-    # rest of code is new transform version with paths not lines
-    # TODO remove this line for wire_color
-    wire_color = "red"
-    draw_wire_partner_and_reflection("wire_out", wires[0], wire_delta, wire_color, "none", "0")
-    draw_wire_partner_and_reflection("wire_in",  wires[4], win_delta,  wire_color, "none", "0")
-
 def draw_platform(level, fill, stroke, stroke_width):
     x = level[0]
     y = level[1]
@@ -304,16 +285,17 @@ def draw_subplatform(level, fill, stroke, stroke_width):
     #       x1, y2                    x4, y2
     #x0, y3                                 x5, y3
     #               x2, y4   x3, y4
-    x0 = wire_out - 7  # wire
+    x0 = wire_x - wire_width  # wire
     x1 = x
     x2 = x + 1 * width / 3
     x3 = x + 2 * width / 3
     x4 = x +     width
-    x5 = p_width - wire_out + 7 # wire
+    x5 = p_width - wire_x + 7 # wire
 
     y1 = y
     y2 = y + 1 * height / 3
-    y3 = wire_y + 5 #wire
+    # TODO check this width, I just guessed, when it comes to wire
+    y3 = wire_y + wire_width #wire
     y4 = y + height * 3
 
     # starting with x2, y1 we draw this going clockwise around the polygon.
@@ -386,7 +368,10 @@ for i in range(n_platforms):
     draw_spire_for_level(levels[i], spires[i], spire_color, "none", "0")
 
 # draw the 8 wires that support the tower at the base
-draw_wires(wires, "none", wire_stroke, wire_width)
+# TODO remove this wire_color thingy
+wire_color ="blue"
+draw_wire_partner_and_reflection("wire_out", wires[0], wire_delta, wire_color, "none", "0")
+draw_wire_partner_and_reflection("wire_in",  wires[1], win_delta,  wire_color, "none", "0")
 
 draw_subplatform(levels[0], subplatform_color, "none", "0")
 
