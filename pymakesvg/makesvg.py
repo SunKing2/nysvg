@@ -1,22 +1,22 @@
-pheight = 4719
-pwidth = 928
-pcenter = pwidth / 2.0
+p_height = 4719
+p_width = 928
+p_center = p_width / 2.0
 
 sil_color = "black"
 
 # coordinates for bottom platform of tower
-onelevelx = 339 - 12.5
-onelevely = 3039 + 495
-onelevelw = 250 + 25
-onelevelh = 65 + 5
+level_one_x = 339 - 12.5
+level_one_y = 3039 + 495
+level_one_width = 250 + 25
+level_one_height = 65 + 5
 
 # spire below 0th platform is taller
 spire_zero_multiplier = 1.09
 spire_height = 465
 # a spire's width is the platform's width * spire_width_multiplier
 spire_width_multiplier = 0.4
-spire_taper_top_y = onelevely + onelevelh / 2.0 + spire_height * spire_zero_multiplier
-spire_taper_top_width = onelevelw * spire_width_multiplier
+spire_taper_top_y = level_one_y + level_one_height / 2.0 + spire_height * spire_zero_multiplier
+spire_taper_top_width = level_one_width * spire_width_multiplier
 spire_taper_height = spire_height * .73609
 spire_taper_middle_y = spire_taper_top_y + spire_taper_height
 spire_taper_middle_width = spire_taper_top_width * 1.86364
@@ -29,14 +29,14 @@ tapered_base_color = sil_color
 
 # these are the changes in coordinates for each level in the tower
 # the drawing starts with the bottom platform and add these to get the next platform
-deltax = 12.5
-deltay = -495
-deltaw = -25
-deltah = -5
+delta_x = 12.5
+delta_y = -495
+delta_width = -25
+delta_height = -5
 
-# all platforms are deltay apart, but
+# all platforms are delta_y apart, but
 # top platform is nearer to the previous platform
-deltay_top_level = deltay * .75
+delta_y_top_level = delta_y * .75
 
 
 # each platform has a fence-like barrier to prevent people from falling off :)
@@ -49,7 +49,7 @@ peakh = 469
 peak_color = sil_color # "blue"
 subpeak_color = sil_color # "yellow"
 
-nplatforms = 7
+n_platforms = 7
 
 #underside of octagon base
 platform_color = sil_color # "#0a1326"
@@ -68,15 +68,15 @@ win_bottom = 275.414
 win_in = win_out + win_delta
 wires = [
     #outer
-    (wire_out,           wire_y, 0,     pheight),
-    (pwidth - wire_out, wire_y, pwidth, pheight),
-    (wire_in,           wire_y, 0 + wire_delta,     pheight),
-    (pwidth - wire_in, wire_y, pwidth - wire_delta, pheight),
+    (wire_out,           wire_y, 0,     p_height),
+    (p_width - wire_out, wire_y, p_width, p_height),
+    (wire_in,           wire_y, 0 + wire_delta,     p_height),
+    (p_width - wire_in, wire_y, p_width - wire_delta, p_height),
     #inner
-    (win_out,           wire_y, win_bottom,     pheight),
-    (pwidth - win_out, wire_y, pwidth - win_bottom, pheight),
-    (win_in,           wire_y, win_bottom + win_delta,     pheight),
-    (pwidth - win_in, wire_y, pwidth - win_bottom - win_delta, pheight),
+    (win_out,           wire_y, win_bottom,     p_height),
+    (p_width - win_out, wire_y, p_width - win_bottom, p_height),
+    (win_in,           wire_y, win_bottom + win_delta,     p_height),
+    (p_width - win_in, wire_y, p_width - win_bottom - win_delta, p_height),
 ]
 
 # platforms
@@ -85,13 +85,13 @@ wires = [
 levels = []
 
 spires = []
-for i in range(nplatforms):
-    x = onelevelx + i * deltax
-    y = onelevely + i * deltay
+for i in range(n_platforms):
+    x = level_one_x + i * delta_x
+    y = level_one_y + i * delta_y
     if i == 6:
-        y -= deltay - deltay_top_level
-    width = onelevelw + i * deltaw
-    height = onelevelh + i * deltah
+        y -= delta_y - delta_y_top_level
+    width = level_one_width + i * delta_width
+    height = level_one_height + i * delta_height
     # each platform
     level = (x, y, width, height)
     levels.append(level)
@@ -99,8 +99,8 @@ for i in range(nplatforms):
     # spires on lower levels (0 to 3) have same dimensions
     # but I'm going to ignore that reality, this looks better!
     spire_width = width * spire_width_multiplier
-    spire_x = pcenter - spire_width / 2.0
-    spire_y = onelevely + i * deltay + height / 2.0
+    spire_x = p_center - spire_width / 2.0
+    spire_y = level_one_y + i * delta_y + height / 2.0
     modified_spire_height = spire_height
     if (i == 0):
         # 1.1 is to make it a bit taller than it is supposed to be
@@ -134,7 +134,6 @@ def draw_barrier(level, fill, stroke, stroke_width):
                x2, barrier_y, x3, barrier_y,
                x4, y2 - barrier_height, x4, y2,
                x3, barrier_y + barrier_height, x2, barrier_y + barrier_height,
-
                )
 
     # end of draw_barrier()
@@ -155,8 +154,8 @@ def draw_peak(level, fill, stroke, stroke_width):
     # I use multiples rather than absolutes to allow for scaling
     # delete me square_height_multiplier = 14 #12.75
     peakx = square_x
-    # height of peak is the same as the deltay (the distance between bases of two octagons)
-    peakh = -deltay
+    # height of peak is the same as the delta_y (the distance between bases of two octagons)
+    peakh = -delta_y
     peaky = baseline - peakh
     peakw = square_w
 
@@ -164,13 +163,13 @@ def draw_peak(level, fill, stroke, stroke_width):
     # center of square vertically is where the triangle starts:
     tundery = baseline
     tunderw = square_w * .85
-    tunderx = pcenter - tunderw / 2.0
+    tunderx = p_center - tunderw / 2.0
     tunderh = tunderw
     print """
       <polygon fill="{}" points="{} {}, {} {},  {} {}" />
     """.format(
         subpeak_color,
-        tunderx, tundery, tunderx + tunderw, tundery, pcenter, tundery + tunderh
+        tunderx, tundery, tunderx + tunderw, tundery, p_center, tundery + tunderh
     )
 
     # peak (triangle shape)
@@ -178,7 +177,7 @@ def draw_peak(level, fill, stroke, stroke_width):
       <polygon fill="{}" points="{} {}, {} {},  {} {}" />
     """.format(
         peak_color,
-        tunderx, tundery + 1, tunderx + tunderw, tundery + 1, pcenter, tundery - peakh
+        tunderx, tundery + 1, tunderx + tunderw, tundery + 1, p_center, tundery - peakh
     )
 
 
@@ -281,7 +280,7 @@ def draw_subplatform(level, fill, stroke, stroke_width):
     x2 = x + 1 * width / 3
     x3 = x + 2 * width / 3
     x4 = x +     width
-    x5 = pwidth - wire_out + 7 # wire
+    x5 = p_width - wire_out + 7 # wire
 
     y1 = y
     y2 = y + 1 * height / 3
@@ -303,10 +302,10 @@ def draw_subplatform(level, fill, stroke, stroke_width):
 # shape of house roof plus house walls  (flat on top)
 # sort of like two parts: top sloping part, and bottom rectangle
 def draw_big_fat_base(top_y, top_width, middle_y, middle_width, bottom_height, fill, stroke, stroke_width):
-    top_right_x = pcenter + top_width / 2.0
-    top_left_x  = pcenter - top_width / 2.0
-    middle_right_x = pcenter + middle_width / 2.0
-    middle_left_x  = pcenter - middle_width / 2.0
+    top_right_x = p_center + top_width / 2.0
+    top_left_x  = p_center - top_width / 2.0
+    middle_right_x = p_center + middle_width / 2.0
+    middle_left_x  = p_center - middle_width / 2.0
     bottom_right_x = middle_right_x
     bottom_left_x  = middle_left_x
     bottom_y = middle_y + bottom_height
@@ -350,11 +349,11 @@ print """
 # the peak is located at a y where there is usually a platform
 # the y at levels[6] is inconsistent with other levels,
 # so create a tuple like levels[6] but with the same distance as other levels:
-peak_level = (levels[6][0], levels[5][1] + deltay, levels[6][2], levels[6][3] )
+peak_level = (levels[6][0], levels[5][1] + delta_y, levels[6][2], levels[6][3] )
 draw_peak(peak_level, "red", "none", "0")
 
 
-for i in range(nplatforms):
+for i in range(n_platforms):
     draw_spire_for_level(levels[i], spires[i], spire_color, "none", "0")
 
 # draw the 8 wires that support the tower at the base
