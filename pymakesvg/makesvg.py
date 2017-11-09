@@ -261,22 +261,18 @@ def draw_wires(wires, fill, stroke, stroke_width):
     # TODO remove this line for wire_color
     wire_color = "red"
     wire = wires[0]
+    # outer wire left
     print """
         <g id="wire_out">
         """
     angled_line_v(wires[0], wire_width, wire_color, "none", "0")
+    # right of outer wire left, outer wire right, left of outer wire right
     print """
         </g>
-    """
-    print """
         <use xlink:href="#wire_out" transform="translate({}, 0)"/>
-    """.format(wire_delta)
-    print """
         <use xlink:href="#wire_out" transform="translate({}, 0) scale(-1, 1)"/>
-    """.format(p_width - 1)
-    print """
         <use xlink:href="#wire_out" transform="translate({}, 0) scale(-1, 1)"/>
-    """.format(p_width - 1 - wire_delta)
+    """.format(wire_delta, p_width - 1, p_width - 1 - wire_delta)
 
 def draw_platform(level, fill, stroke, stroke_width):
     x = level[0]

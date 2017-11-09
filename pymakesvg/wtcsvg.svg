@@ -83,14 +83,8 @@
     
 
         </g>
-    
-
         <use xlink:href="#wire_out" transform="translate(24.3, 0)"/>
-    
-
         <use xlink:href="#wire_out" transform="translate(927, 0) scale(-1, 1)"/>
-    
-
         <use xlink:href="#wire_out" transform="translate(902.7, 0) scale(-1, 1)"/>
     
 
