@@ -65,7 +65,7 @@ wire_y2 = p_height + 50.14
 # outer wire, inner wire
 wires = [
     (286, wire_y, -20, wire_y2),
-    (380, wire_y, 275, wire_y2),
+    (390, wire_y, 265, wire_y2),
 ]
 
 # platforms
@@ -236,7 +236,7 @@ def draw_spire_for_level(level, spire, fill, stroke, stroke_width):
 def angled_line_v(line, path_width, fill, stroke, stroke_width):
     # clockwise starting at top left point (which is x)
     print """
-        <path d="M {} {} l{} 0 L {} {} l-{} 0 z "  fill="{}" stroke="{}" stroke-width="{}"></line>
+        <path d="M {} {} l{} 0 L {} {} l-{} 0 z "  fill="{}" stroke="{}" stroke-width="{}"></path>
     """.format(line[0], line[1], path_width, line[2] + path_width, line[3], path_width, fill, stroke, stroke_width)
 
 def draw_wire_partner_and_reflection(group_id, wire, delta_x, fill, stroke, stroke_width):
@@ -363,8 +363,6 @@ for i in range(n_platforms):
     draw_spire_for_level(levels[i], spires[i], spire_color, "none", "0")
 
 # draw the 8 wires that support the tower at the base
-# TODO remove this wire_color thingy
-wire_color ="blue"
 draw_wire_partner_and_reflection("wire_out", wires[0], wire_delta, wire_color, "none", "0")
 draw_wire_partner_and_reflection("wire_in",  wires[1], win_delta,  wire_color, "none", "0")
 
