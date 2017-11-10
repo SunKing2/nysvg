@@ -122,13 +122,13 @@ def draw_barrier(level, fill, stroke, stroke_width):
     barrier_y = square_y - barrier_base_height - barrier_height
     y2 = barrier_y + barrier_height + square_height / 3.0
     print """
-    <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="{}" stroke-width="2px"></rect>""".format(
+    <rect class="barrier_center" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="{}" stroke-width="2px"></rect>""".format(
         x2, barrier_y, square_width / 3.0, barrier_height,
         fill
         )
     # draw perimeter of barrier
     print """
-    <polygon fill="none" stroke="{}" stroke-width="2" points="{} {} {} {}   {} {} {} {}  {} {} {} {}  {} {} {} {}"/>
+    <polygon class="barrier_perimeter" fill="none" stroke="{}" stroke-width="2" points="{} {} {} {}   {} {} {} {}  {} {} {} {}  {} {} {} {}"/>
     """.format(barrier_color,
                square_x + 1, y2, square_x + 1, y2 - barrier_height,
                x2, barrier_y, x3, barrier_y,
@@ -167,7 +167,7 @@ def draw_peak(level, fill, stroke, stroke_width):
     tunderx = p_center - tunderw / 2.0
     tunderh = tunderw
     print """
-      <polygon fill="{}" points="{} {}, {} {},  {} {}" />
+      <polygon id="subpeak" fill="{}" points="{} {}, {} {},  {} {}" />
     """.format(
         subpeak_color,
         tunderx, tundery, tunderx + tunderw, tundery, p_center, tundery + tunderh
@@ -175,7 +175,7 @@ def draw_peak(level, fill, stroke, stroke_width):
 
     # peak (triangle shape)
     print """
-      <polygon fill="{}" points="{} {}, {} {},  {} {}" />
+      <polygon id="peak" fill="{}" points="{} {}, {} {},  {} {}" />
     """.format(
         peak_color,
         tunderx, tundery + 1, tunderx + tunderw, tundery + 1, p_center, tundery - peakh
@@ -185,16 +185,17 @@ def draw_peak(level, fill, stroke, stroke_width):
     # end of peak()
 
 
+# TODO is this even used?  I don't think so
 # draw a svg rectangle by printing out the <rect> code
-def rect(x, y, width, height, fill, stroke, stroke_width):
+def rect(klass, x, y, width, height, fill, stroke, stroke_width):
     print"""
-    <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
-    """.format(x, y, width, height, fill, stroke, stroke_width)
+    <rect class="{}" x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
+    """.format(klass, x, y, width, height, fill, stroke, stroke_width)
     # end of #rect()
 
 
 # draw a svg octagon by printing out the <polygon> code
-def octagon(x, y, width, height, fill, stroke, stroke_width):
+def octagon(klass, x, y, width, height, fill, stroke, stroke_width):
     # the polygon coordinates will be (they are 1 indexed):
     #               x2, y1   x3, y1
     #       x1, y2                    x4, y2
@@ -214,8 +215,9 @@ def octagon(x, y, width, height, fill, stroke, stroke_width):
     # starting point was just picked arbitrarily, I chose the leftmost top visible point
     # clockwise is just arbitrary, it just needs to be contiguous
     print """
-      <polygon fill="{}" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
+      <polygon class="{}" fill="{}" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
     """.format(
+        klass,
         fill,
         x2, y1, x3, y1,
         x4, y2, x4, y3,
@@ -236,25 +238,25 @@ def draw_spire_for_level(level, spire, fill, stroke, stroke_width):
     spire_height = spire[3]
 
     print"""
-    <ellipse cx="{}" cy="{}" rx="{}" ry="{}" fill="{}" stroke="{}" stroke-width="{}"></ellipse>
+    <ellipse class="spire_top" cx="{}" cy="{}" rx="{}" ry="{}" fill="{}" stroke="{}" stroke-width="{}"></ellipse>
     """.format(x + width / 2, y + height / 2, width/4, height /4, fill, stroke, stroke_width)
     print"""
-    <rect x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
+    <rect class="spire" x="{}" y="{}" width="{}" height="{}" fill="{}" stroke="{}" stroke-width="{}"></rect>
     """.format(spire_x, spire_y, spire_width, spire_height, fill, stroke, stroke_width)
 
 # draw a line, that goes up and down at any angle but first x is leftmost part
 # width is exactly path_width all of entire line, as next node is directly horizontal right
 # line is tuple of (x1, y1, x2, y2)
-def angled_line_v(line, path_width, fill, stroke, stroke_width):
+def angled_line_v(klass, line, path_width, fill, stroke, stroke_width):
     # clockwise starting at top left point (which is x)
     print """
-        <path d="M {} {} l{} 0 L {} {} l-{} 0 z "  fill="{}" stroke="{}" stroke-width="{}"></path>
-    """.format(line[0], line[1], path_width, line[2] + path_width, line[3], path_width, fill, stroke, stroke_width)
+        <path class="{}" d="M {} {} l{} 0 L {} {} l-{} 0 z "  fill="{}" stroke="{}" stroke-width="{}"></path>
+    """.format(klass, line[0], line[1], path_width, line[2] + path_width, line[3], path_width, fill, stroke, stroke_width)
 
 def draw_wire_partner_and_reflection(group_id, wire, delta_x, fill, stroke, stroke_width):
     # outer wire left
     print "<g id=\"{}\">".format(group_id)
-    angled_line_v(wire, wire_width, fill, "none", "0")
+    angled_line_v("wire_outside", wire, wire_width, fill, "none", "0")
     # right of outer wire left, outer wire right, left of outer wire right
     print """
         </g>
@@ -271,10 +273,10 @@ def draw_platform(level, fill, stroke, stroke_width):
     height = level[3]
 
     # draw the part between bottom of barrier and the platform underside octagon
-    octagon(x, y - barrier_base_height, width, height, barrier_base_color, stroke, stroke_width)
+    octagon("barrier_base", x, y - barrier_base_height, width, height, barrier_base_color, stroke, stroke_width)
 
     # draw platform base, i.e. the underside octagon of the platform
-    octagon(x, y, width, height, fill, stroke, stroke_width)
+    octagon("platform_underside", x, y, width, height, fill, stroke, stroke_width)
 
     # barrier so people don't fall off platform :)
     draw_barrier(level, barrier_color, "none", "0")
@@ -308,7 +310,7 @@ def draw_subplatform(level, fill, stroke, stroke_width):
 
     # starting with x2, y1 we draw this going clockwise around the polygon.
     print """
-      <polygon fill="{}" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
+      <polygon class="bottom_subplatform" fill="{}" points="{} {}, {} {},  {} {}, {} {},    {} {},  {}, {},      {} {},   {} {}" />
     """.format(
         fill,
         x2, y1, x3, y1,
@@ -329,7 +331,7 @@ def draw_big_fat_base(top_y, top_width, middle_y, middle_width, bottom_height, f
     bottom_left_x  = middle_left_x
     bottom_y = middle_y + bottom_height
     print """
-      <polygon fill="{}" points="{} {}, {} {},  {} {}, {} {},  {} {}, {} {}" />
+      <polygon class="tapered_spire_base" fill="{}" points="{} {}, {} {},  {} {}, {} {},  {} {}, {} {}" />
     """.format(
         fill,
         top_right_x, top_y,     middle_right_x, middle_y,     bottom_right_x, bottom_y,
