@@ -5,18 +5,22 @@ p_center = p_width / 2.0
 sil_color = "black"
 
 # coordinates for bottom platform of tower
-level_one_x = 339 - 12.5
-level_one_y = 3039 + 495
-level_one_width = 250 + 25
-level_one_height = 65 + 5
+level_zero_x = 339 - 12.5
+level_zero_y = 3039 + 495
+level_zero_width = 250 + 25
+level_zero_height = 65 + 5
+
+# top two platforms are relatively smaller than the others below them.
+# this is a number I just produced arbitrarily based on a guess
+multiplier_top_levels = .11
 
 # spire below 0th platform is taller
 spire_zero_multiplier = 1.09
 spire_height = 465
 # a spire's width is the platform's width * spire_width_multiplier
 spire_width_multiplier = 0.4
-spire_taper_top_y = level_one_y + level_one_height / 2.0 + spire_height * spire_zero_multiplier
-spire_taper_top_width = level_one_width * spire_width_multiplier
+spire_taper_top_y = level_zero_y + level_zero_height / 2.0 + spire_height * spire_zero_multiplier
+spire_taper_top_width = level_zero_width * spire_width_multiplier
 spire_taper_height = spire_height * .73609
 spire_taper_middle_y = spire_taper_top_y + spire_taper_height
 spire_taper_middle_width = spire_taper_top_width * 1.86364
@@ -75,12 +79,19 @@ levels = []
 
 spires = []
 for i in range(n_platforms):
-    x = level_one_x + i * delta_x
-    y = level_one_y + i * delta_y
+    x = level_zero_x + i * delta_x
+    y = level_zero_y + i * delta_y
     if i == 6:
         y -= delta_y - delta_y_top_level
-    width = level_one_width + i * delta_width
-    height = level_one_height + i * delta_height
+    width = level_zero_width + i * delta_width
+    height = level_zero_height + i * delta_height
+    if (i > 4):
+        # width of top two platforms is width of triangle with sides from
+        # platform 4 to widest part of peak
+        width = width
+        #width =  level_zero_width - level_zero_width  * i * multiplier_top_levels
+        #height = level_zero_height - level_zero_height * i * multiplier_top_levels
+        #x = p_center - width / 2.0
     # each platform
     level = (x, y, width, height)
     levels.append(level)
@@ -89,7 +100,7 @@ for i in range(n_platforms):
     # but I'm going to ignore that reality, this looks better!
     spire_width = width * spire_width_multiplier
     spire_x = p_center - spire_width / 2.0
-    spire_y = level_one_y + i * delta_y + height / 2.0
+    spire_y = level_zero_y + i * delta_y + height / 2.0
     modified_spire_height = spire_height
     if (i == 0):
         # 1.1 is to make it a bit taller than it is supposed to be
@@ -134,7 +145,7 @@ def draw_peak(level, fill, stroke, stroke_width):
     square_w = level[2]
     square_height = level[3]
     # y location of base of peak
-    # this corresponds to y location of top leftmost corner of octagon
+    # this corresponds to y location of top leftmost corner of octagon  || did I mean square?
     baseline = square_y + square_height / 3.0
     # TODO this looks like a magic number
     baseline_width = .85 * square_w
@@ -151,6 +162,7 @@ def draw_peak(level, fill, stroke, stroke_width):
     #triangle under peak pointing downwards
     # center of square vertically is where the triangle starts:
     tundery = baseline
+    # TODO magic number
     tunderw = square_w * .85
     tunderx = p_center - tunderw / 2.0
     tunderh = tunderw
@@ -268,6 +280,7 @@ def draw_platform(level, fill, stroke, stroke_width):
     draw_barrier(level, barrier_color, "none", "0")
     # end draw_platform()
 
+# this is a single platform that is on the low level
 # 8 sided polygon that is not an octagon.  Ugly?  yes!
 def draw_subplatform(level, fill, stroke, stroke_width):
     x = level[0]
