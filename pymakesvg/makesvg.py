@@ -111,17 +111,17 @@ def draw_barrier(level, fill, stroke, stroke_width):
     barrier_y = square_y - barrier_base_height - barrier_height
     y2 = barrier_y + barrier_height + square_height / 3.0
     print """
-    <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="{}" stroke-width="4px"></rect>""".format(
+    <rect id="level1" x="{}" y="{}" width="{}" height="{}" fill="none" stroke="{}" stroke-width="2px"></rect>""".format(
         x2, barrier_y, square_width / 3.0, barrier_height,
         fill
         )
     # draw perimeter of barrier
     print """
-    <polygon fill="none" stroke="{}" stroke-width="4" points="{} {} {} {}   {} {} {} {}  {} {} {} {}  {} {} {} {}"/>
+    <polygon fill="none" stroke="{}" stroke-width="2" points="{} {} {} {}   {} {} {} {}  {} {} {} {}  {} {} {} {}"/>
     """.format(barrier_color,
-               square_x, y2, square_x, y2 - barrier_height,
+               square_x + 1, y2, square_x + 1, y2 - barrier_height,
                x2, barrier_y, x3, barrier_y,
-               x4, y2 - barrier_height, x4, y2,
+               x4 - 1, y2 - barrier_height, x4 - 1, y2,
                x3, barrier_y + barrier_height, x2, barrier_y + barrier_height,
                )
 
