@@ -3,6 +3,7 @@ p_width = 928
 p_center = p_width / 2.0
 
 sil_color = "black"
+sil_secondary_color = "#111"
 
 # coordinates for bottom platform of tower
 level_zero_x = 339 - 12.5
@@ -38,21 +39,21 @@ delta_y = -495
 delta_width = -25
 delta_height = -5
 
-# all platforms are delta_y apart, but
-# top platform is nearer to the previous platform
-delta_y_top_level = delta_y * .75
-
-
-# each platform has a fence-like barrier to prevent people from falling off :)
-barrier_height = 43
-barrier_base_height = 8
-barrier_color = "#666" #"yellow"  # TODO #333
-barrier_base_color = barrier_color # "green"
-
 peak_height = - delta_y
 peak_color = sil_color # "blue"
 subpeak_color = sil_color # "yellow"
 peak = (409.913, p_height - 4138.113 - peak_height, 107.477, peak_height)
+
+# all platforms are delta_y apart, but
+# top platform is nearer to the previous platform
+delta_y_top_level = delta_y * .75
+y_top_tweak = peak_height * .03 # .0347
+
+# each platform has a fence-like barrier to prevent people from falling off :)
+barrier_height = 43
+barrier_base_height = 8
+barrier_color = sil_secondary_color # "#666" #"yellow"  # TODO #333
+barrier_base_color = barrier_color # "green"
 
 n_platforms = 7
 
@@ -86,7 +87,7 @@ for i in range(n_platforms):
     y = level_zero_y + i * delta_y
     # top level platform is not in a normal y position, it's lower
     if i == 6:
-        y -= delta_y - delta_y_top_level
+        y -= delta_y - delta_y_top_level + y_top_tweak
     width = level_zero_width + i * delta_width
     height = level_zero_height + i * delta_height
     if (i > 4):
@@ -109,6 +110,9 @@ for i in range(n_platforms):
         # 1.1 is to make it a bit taller than it is supposed to be
         # so that there is no spaces between it and the taper spire below it
         modified_spire_height *= spire_zero_multiplier * 1.1
+    # top two spires are a bit short
+    if (i > 4):
+        modified_spire_height *= 1.1
     spire = (spire_x, spire_y, spire_width, modified_spire_height)
     spires.append(spire)
 
@@ -355,6 +359,13 @@ print """
   width="928" height="4719"/>
   """
 
+# draw the 8 wires that support the tower at the base
+draw_wire_partner_and_reflection("wire_out", wires[0], wire_delta, wire_color, "none", "0")
+draw_wire_partner_and_reflection("wire_in",  wires[1], win_delta,  wire_color, "none", "0")
+
+draw_subplatform(levels[0], subplatform_color, "none", "0")
+
+
 # peak
 # draw shiny silver triangle thingy on top of tower
 # the peak is located at a y where there is usually a platform
@@ -367,11 +378,6 @@ draw_peak(peak, peak_color, "none", "0")
 for i in range(n_platforms):
     draw_spire_for_level(levels[i], spires[i], spire_color, "none", "0")
 
-# draw the 8 wires that support the tower at the base
-draw_wire_partner_and_reflection("wire_out", wires[0], wire_delta, wire_color, "none", "0")
-draw_wire_partner_and_reflection("wire_in",  wires[1], win_delta,  wire_color, "none", "0")
-
-draw_subplatform(levels[0], subplatform_color, "none", "0")
 
 # draw each platform
 for level in levels:
