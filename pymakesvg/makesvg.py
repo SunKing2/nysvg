@@ -141,49 +141,7 @@ def draw_barrier(level, fill, stroke, stroke_width):
 
     # end of draw_barrier()
 
-def draw_peak(level, fill, stroke, stroke_width):
-    color = fill
-    square_x = level[0]
-    square_y = level[1]
-    square_w = level[2]
-    square_height = level[3]
-    # y location of base of peak
-    # this corresponds to y location of top leftmost corner of octagon  || did I mean square?
-    baseline = square_y + square_height / 3.0
-
-    # the following peak dimensions were determined by eyeballing a picture
-    # I use multiples rather than absolutes to allow for scaling
-    # delete me square_height_multiplier = 14 #12.75
-    peak_x = square_x
-    # height of peak is the same as the delta_y (the distance between bases of two octagons)
-    peak_height = -delta_y
-    peak_y = baseline - peak_height
-    peak_width = square_w
-
-    #triangle under peak pointing downwards
-    # center of square vertically is where the triangle starts:
-    tundery = baseline
-    # TODO magic number
-    tunderw = square_w * .85
-    tunderx = p_center - tunderw / 2.0
-    tunderh = tunderw
-    print """
-      <polygon id="subpeak" fill="{}" points="{} {}, {} {},  {} {}" />
-    """.format(
-        subpeak_color,
-        tunderx, tundery, tunderx + tunderw, tundery, p_center, tundery + tunderh
-    )
-
-    # peak (triangle shape)
-    print """
-      <polygon id="peak" fill="{}" points="{} {}, {} {},  {} {}" />
-    """.format(
-        peak_color,
-        tunderx, tundery + 1, tunderx + tunderw, tundery + 1, p_center, tundery - peak_height
-    )
-    # end of peak()
-
-def draw_peak2(square, fill, stroke, stroke_width):
+def draw_peak(square, fill, stroke, stroke_width):
     color = fill
 
     peak_x = square[0]
@@ -211,7 +169,7 @@ def draw_peak2(square, fill, stroke, stroke_width):
     print """
       <polygon id="peak" fill="{}" points="{} {}, {} {},  {} {}" />
     """.format(
-        peak_color,
+        fill,
         tunderx, tundery + 1, tunderx + tunderw, tundery + 1, p_center, tundery - peak_height
     )
     # end of draw_peak()
@@ -403,8 +361,7 @@ print """
 # the y at levels[6] is inconsistent with other levels,
 # so create a tuple like levels[6] but with the same distance as other levels:
 peak_level = (levels[6][0], levels[5][1] + delta_y, levels[6][2], levels[6][3] )
-#draw_peak(peak_level, "red", "none", "0")
-draw_peak2(peak, "blue", "none", "0")
+draw_peak(peak, peak_color, "none", "0")
 
 
 for i in range(n_platforms):
