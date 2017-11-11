@@ -25,7 +25,7 @@ spire_taper_height = spire_height * .73609
 spire_taper_middle_y = spire_taper_top_y + spire_taper_height
 spire_taper_middle_width = spire_taper_top_width * 1.86364
 # this .75 is just arbitrary, change it to what looks good:
-spire_taper_bottom_height = spire_height * .75
+spire_taper_bottom_height = spire_height * .75 + 359 # 359 because it needed extending
 spire_color = sil_color # "#283250"
 
 tapered_base_color = sil_color
@@ -59,18 +59,18 @@ n_platforms = 7
 #underside of octagon base
 platform_color = sil_color # "#0a1326"
 
-subplatform_color = sil_color #"green"
+subplatform_color = "#111" # sil_color #"green"
 
 wire_width = 7;
 wire_delta = 24.3  # distance between this wire and next one
 win_delta = 17.0   # distance between inner wires
 wire_color = sil_color #"red"
 wire_y = 3690.38
-wire_y2 = p_height + 50.14
+wire_y2 = p_height + 117
 # outer wire, inner wire
 wires = [
-    (286, wire_y, -20, wire_y2),
-    (390, wire_y, 265, wire_y2),
+    (286, wire_y, -39, wire_y2),
+    (390, wire_y, 257, wire_y2),
 ]
 
 # platforms
