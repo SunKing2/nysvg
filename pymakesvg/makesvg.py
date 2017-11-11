@@ -49,9 +49,10 @@ barrier_base_height = 8
 barrier_color = "#666" #"yellow"  # TODO #333
 barrier_base_color = barrier_color # "green"
 
-peakh = 469
+peak_height = - delta_y
 peak_color = sil_color # "blue"
 subpeak_color = sil_color # "yellow"
+peak = (409.913, p_height - 4138.113 - peak_height, 107.477, peak_height)
 
 n_platforms = 7
 
@@ -79,8 +80,11 @@ levels = []
 
 spires = []
 for i in range(n_platforms):
+    # x y width height are dimensions of square for each platform
+    # square here, refers to the bounding box of the platform underside octagon
     x = level_zero_x + i * delta_x
     y = level_zero_y + i * delta_y
+    # top level platform is not in a normal y position, it's lower
     if i == 6:
         y -= delta_y - delta_y_top_level
     width = level_zero_width + i * delta_width
@@ -88,17 +92,16 @@ for i in range(n_platforms):
     if (i > 4):
         # width of top two platforms is width of triangle with sides from
         # platform 4 to widest part of peak
-        width = width
-        #width =  level_zero_width - level_zero_width  * i * multiplier_top_levels
-        #height = level_zero_height - level_zero_height * i * multiplier_top_levels
-        #x = p_center - width / 2.0
+        width =  level_zero_width - level_zero_width  * i * multiplier_top_levels
+        height = level_zero_height - level_zero_height * i * multiplier_top_levels
+        x = p_center - width / 2.0
     # each platform
     level = (x, y, width, height)
     levels.append(level)
     # each spire supporting that platform
     # spires on lower levels (0 to 3) have same dimensions
     # but I'm going to ignore that reality, this looks better!
-    spire_width = width * spire_width_multiplier
+    spire_width = (level_zero_width + i * delta_width) * spire_width_multiplier
     spire_x = p_center - spire_width / 2.0
     spire_y = level_zero_y + i * delta_y + height / 2.0
     modified_spire_height = spire_height
@@ -147,17 +150,15 @@ def draw_peak(level, fill, stroke, stroke_width):
     # y location of base of peak
     # this corresponds to y location of top leftmost corner of octagon  || did I mean square?
     baseline = square_y + square_height / 3.0
-    # TODO this looks like a magic number
-    baseline_width = .85 * square_w
 
     # the following peak dimensions were determined by eyeballing a picture
     # I use multiples rather than absolutes to allow for scaling
     # delete me square_height_multiplier = 14 #12.75
-    peakx = square_x
+    peak_x = square_x
     # height of peak is the same as the delta_y (the distance between bases of two octagons)
-    peakh = -delta_y
-    peaky = baseline - peakh
-    peakw = square_w
+    peak_height = -delta_y
+    peak_y = baseline - peak_height
+    peak_width = square_w
 
     #triangle under peak pointing downwards
     # center of square vertically is where the triangle starts:
@@ -178,11 +179,42 @@ def draw_peak(level, fill, stroke, stroke_width):
       <polygon id="peak" fill="{}" points="{} {}, {} {},  {} {}" />
     """.format(
         peak_color,
-        tunderx, tundery + 1, tunderx + tunderw, tundery + 1, p_center, tundery - peakh
+        tunderx, tundery + 1, tunderx + tunderw, tundery + 1, p_center, tundery - peak_height
+    )
+    # end of peak()
+
+def draw_peak2(square, fill, stroke, stroke_width):
+    color = fill
+
+    peak_x = square[0]
+    peak_y = square[1]
+    peak_width = square[2]
+    peak_height = square[3]
+
+    baseline = peak_y + peak_height
+
+    #triangle under peak pointing downwards
+    # center of square vertically is where the triangle starts:
+    tundery = baseline
+    # TODO magic number
+    tunderw = peak_width
+    tunderx = p_center - tunderw / 2.0
+    tunderh = tunderw
+    print """
+      <polygon id="subpeak" fill="{}" points="{} {}, {} {},  {} {}" />
+    """.format(
+        subpeak_color,
+        tunderx, tundery, tunderx + tunderw, tundery, p_center, tundery + tunderh
     )
 
-
-    # end of peak()
+    # peak (triangle shape)
+    print """
+      <polygon id="peak" fill="{}" points="{} {}, {} {},  {} {}" />
+    """.format(
+        peak_color,
+        tunderx, tundery + 1, tunderx + tunderw, tundery + 1, p_center, tundery - peak_height
+    )
+    # end of draw_peak()
 
 
 # TODO is this even used?  I don't think so
@@ -371,7 +403,8 @@ print """
 # the y at levels[6] is inconsistent with other levels,
 # so create a tuple like levels[6] but with the same distance as other levels:
 peak_level = (levels[6][0], levels[5][1] + delta_y, levels[6][2], levels[6][3] )
-draw_peak(peak_level, "red", "none", "0")
+#draw_peak(peak_level, "red", "none", "0")
+draw_peak2(peak, "blue", "none", "0")
 
 
 for i in range(n_platforms):
