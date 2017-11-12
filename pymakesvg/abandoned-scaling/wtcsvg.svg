@@ -1,0 +1,158 @@
+  <svg width="92.8" height="471.9" viewBox="0 0 928 4719">
+  <image xlink:href="centeringtower5withreflection.png"
+  x="0" y="0"
+  width="928" height="4719"/>
+  
+<g id="wire_out">
+
+        <path class="wire_outside" d="M 283.14 3692.1456 l7.021872 0 L -31.485168 4835.65368 l-7.021872 0 z "  fill="black" stroke="none" stroke-width="0"></path>
+    
+
+        </g>
+        <use xlink:href="#wire_out" transform="translate(23.78376, 0)"/>
+        <use xlink:href="#wire_out" transform="translate(927.6992, 0) scale(-1, 1)"/>
+        <use xlink:href="#wire_out" transform="translate(903.91544, 0) scale(-1, 1)"/>
+    
+<g id="wire_in">
+
+        <path class="wire_outside" d="M 385.0704 3692.1456 l7.021872 0 L 267.510672 4835.65368 l-7.021872 0 z "  fill="black" stroke="none" stroke-width="0"></path>
+    
+
+        </g>
+        <use xlink:href="#wire_in" transform="translate(16.9884, 0)"/>
+        <use xlink:href="#wire_in" transform="translate(927.6992, 0) scale(-1, 1)"/>
+        <use xlink:href="#wire_in" transform="translate(910.7108, 0) scale(-1, 1)"/>
+    
+
+      <polygon class="bottom_subplatform" fill="#111" points="419.0472 3533.5872, 509.652 3533.5872,  600.2568 3556.99344, 652.581072 3699.167472,    509.652 3744.24336,  419.0472, 3744.24336,      276.118128 3699.167472,   328.4424 3556.99344" />
+    
+
+      <polygon id="subpeak" fill="black" points="410.553 585.156, 518.1462 585.156,  464.3496 692.7492" />
+    
+
+      <polygon id="peak" fill="black" points="410.553 586.156, 518.1462 586.156,  464.3496 86.8296" />
+    
+
+    <ellipse class="spire_top" cx="464.3496" cy="3568.69656" rx="67.9536" ry="17.55468" fill="black" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect class="spire" x="409.98672" y="3568.69656" width="108.72576" height="556.7551704" fill="black" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse class="spire_top" cx="464.3496" cy="3067.878528" rx="61.72452" ry="16.308864" fill="black" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect class="spire" x="414.969984" y="3067.878528" width="98.759232" height="464.3496" fill="black" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse class="spire_top" cx="464.3496" cy="2567.060496" rx="55.49544" ry="15.063048" fill="black" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect class="spire" x="419.953248" y="2567.060496" width="88.792704" height="464.3496" fill="black" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse class="spire_top" cx="464.3496" cy="2066.242464" rx="49.26636" ry="13.817232" fill="black" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect class="spire" x="424.936512" y="2066.242464" width="78.826176" height="464.3496" fill="black" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse class="spire_top" cx="464.3496" cy="1565.424432" rx="43.03728" ry="12.571416" fill="black" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect class="spire" x="429.919776" y="1565.424432" width="68.859648" height="464.3496" fill="black" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse class="spire_top" cx="464.3496" cy="1057.754412" rx="30.57912" ry="7.899606" fill="black" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect class="spire" x="434.90304" y="1057.754412" width="58.89312" height="510.78456" fill="black" stroke="none" stroke-width="0"></rect>
+    
+
+    <ellipse class="spire_top" cx="464.3496" cy="665.1977904" rx="23.104224" ry="5.9685912" fill="black" stroke="none" stroke-width="0"></ellipse>
+    
+
+    <rect class="spire" x="439.886304" y="555.5659824" width="48.926592" height="510.78456" fill="black" stroke="none" stroke-width="0"></rect>
+    
+
+      <polygon class="barrier_base" fill="#111" points="419.0472 3525.5913264, 509.652 3525.5913264,  600.2568 3548.9975664, 600.2568 3572.4038064,    509.652 3595.8100464,  419.0472, 3595.8100464,      328.4424 3572.4038064,   328.4424 3548.9975664" />
+    
+
+      <polygon class="platform_underside" fill="black" points="419.0472 3533.5872, 509.652 3533.5872,  600.2568 3556.99344, 600.2568 3580.39968,    509.652 3603.80592,  419.0472, 3603.80592,      328.4424 3580.39968,   328.4424 3556.99344" />
+    
+
+    <rect class="barrier_center" x="419.0472" y="3482.5540464" width="90.6048" height="43.03728" fill="none" stroke="#111" stroke-width="3.00015144px"></rect>
+
+    <polygon class="barrier_perimeter" fill="none" stroke="#111" stroke-width="3.00015144" points="329.94247572 3548.9975664 329.94247572 3505.9602864   419.0472 3482.5540464 509.652 3482.5540464  598.75672428 3505.9602864 598.75672428 3548.9975664  509.652 3525.5913264 419.0472 3525.5913264"/>
+    
+
+      <polygon class="barrier_base" fill="#111" points="423.19992 3027.2649264, 505.49928 3027.2649264,  587.79864 3049.0100784, 587.79864 3070.7552304,    505.49928 3092.5003824,  423.19992, 3092.5003824,      340.90056 3070.7552304,   340.90056 3049.0100784" />
+    
+
+      <polygon class="platform_underside" fill="black" points="423.19992 3035.2608, 505.49928 3035.2608,  587.79864 3057.005952, 587.79864 3078.751104,    505.49928 3100.496256,  423.19992, 3100.496256,      340.90056 3078.751104,   340.90056 3057.005952" />
+    
+
+    <rect class="barrier_center" x="423.19992" y="2984.2276464" width="82.29936" height="43.03728" fill="none" stroke="#111" stroke-width="3.00015144px"></rect>
+
+    <polygon class="barrier_perimeter" fill="none" stroke="#111" stroke-width="3.00015144" points="342.40063572 3049.0100784 342.40063572 3005.9727984   423.19992 2984.2276464 505.49928 2984.2276464  586.29856428 3005.9727984 586.29856428 3049.0100784  505.49928 3027.2649264 423.19992 3027.2649264"/>
+    
+
+      <polygon class="barrier_base" fill="#111" points="427.35264 2528.9385264, 501.34656 2528.9385264,  575.34048 2549.0225904, 575.34048 2569.1066544,    501.34656 2589.1907184,  427.35264, 2589.1907184,      353.35872 2569.1066544,   353.35872 2549.0225904" />
+    
+
+      <polygon class="platform_underside" fill="black" points="427.35264 2536.9344, 501.34656 2536.9344,  575.34048 2557.018464, 575.34048 2577.102528,    501.34656 2597.186592,  427.35264, 2597.186592,      353.35872 2577.102528,   353.35872 2557.018464" />
+    
+
+    <rect class="barrier_center" x="427.35264" y="2485.9012464" width="73.99392" height="43.03728" fill="none" stroke="#111" stroke-width="3.00015144px"></rect>
+
+    <polygon class="barrier_perimeter" fill="none" stroke="#111" stroke-width="3.00015144" points="354.85879572 2549.0225904 354.85879572 2505.9853104   427.35264 2485.9012464 501.34656 2485.9012464  573.84040428 2505.9853104 573.84040428 2549.0225904  501.34656 2528.9385264 427.35264 2528.9385264"/>
+    
+
+      <polygon class="barrier_base" fill="#111" points="431.50536 2030.6121264, 497.19384 2030.6121264,  562.88232 2049.0351024, 562.88232 2067.4580784,    497.19384 2085.8810544,  431.50536, 2085.8810544,      365.81688 2067.4580784,   365.81688 2049.0351024" />
+    
+
+      <polygon class="platform_underside" fill="black" points="431.50536 2038.608, 497.19384 2038.608,  562.88232 2057.030976, 562.88232 2075.453952,    497.19384 2093.876928,  431.50536, 2093.876928,      365.81688 2075.453952,   365.81688 2057.030976" />
+    
+
+    <rect class="barrier_center" x="431.50536" y="1987.5748464" width="65.68848" height="43.03728" fill="none" stroke="#111" stroke-width="3.00015144px"></rect>
+
+    <polygon class="barrier_perimeter" fill="none" stroke="#111" stroke-width="3.00015144" points="367.31695572 2049.0351024 367.31695572 2005.9978224   431.50536 1987.5748464 497.19384 1987.5748464  561.38224428 2005.9978224 561.38224428 2049.0351024  497.19384 2030.6121264 431.50536 2030.6121264"/>
+    
+
+      <polygon class="barrier_base" fill="#111" points="435.65808 1532.2857264, 493.04112 1532.2857264,  550.42416 1549.0476144, 550.42416 1565.8095024,    493.04112 1582.5713904,  435.65808, 1582.5713904,      378.27504 1565.8095024,   378.27504 1549.0476144" />
+    
+
+      <polygon class="platform_underside" fill="black" points="435.65808 1540.2816, 493.04112 1540.2816,  550.42416 1557.043488, 550.42416 1573.805376,    493.04112 1590.567264,  435.65808, 1590.567264,      378.27504 1573.805376,   378.27504 1557.043488" />
+    
+
+    <rect class="barrier_center" x="435.65808" y="1489.2484464" width="57.38304" height="43.03728" fill="none" stroke="#111" stroke-width="3.00015144px"></rect>
+
+    <polygon class="barrier_perimeter" fill="none" stroke="#111" stroke-width="3.00015144" points="379.77511572 1549.0476144 379.77511572 1506.0103344   435.65808 1489.2484464 493.04112 1489.2484464  548.92408428 1506.0103344 548.92408428 1549.0476144  493.04112 1532.2857264 435.65808 1532.2857264"/>
+    
+
+      <polygon class="barrier_base" fill="#111" points="443.96352 1033.9593264, 484.73568 1033.9593264,  525.50784 1044.4921344, 525.50784 1055.0249424,    484.73568 1065.5577504,  443.96352, 1065.5577504,      403.19136 1055.0249424,   403.19136 1044.4921344" />
+    
+
+      <polygon class="platform_underside" fill="black" points="443.96352 1041.9552, 484.73568 1041.9552,  525.50784 1052.488008, 525.50784 1063.020816,    484.73568 1073.553624,  443.96352, 1073.553624,      403.19136 1063.020816,   403.19136 1052.488008" />
+    
+
+    <rect class="barrier_center" x="443.96352" y="990.9220464" width="40.77216" height="43.03728" fill="none" stroke="#111" stroke-width="3.00015144px"></rect>
+
+    <polygon class="barrier_perimeter" fill="none" stroke="#111" stroke-width="3.00015144" points="404.69143572 1044.4921344 404.69143572 1001.4548544   443.96352 990.9220464 484.73568 990.9220464  524.00776428 1001.4548544 524.00776428 1044.4921344  484.73568 1033.9593264 443.96352 1033.9593264"/>
+    
+
+      <polygon class="barrier_base" fill="#111" points="448.946784 645.2647344, 479.752416 645.2647344,  510.558048 653.222856, 510.558048 661.1809776,    479.752416 669.1390992,  448.946784, 669.1390992,      418.141152 661.1809776,   418.141152 653.222856" />
+    
+
+      <polygon class="platform_underside" fill="black" points="448.946784 653.260608, 479.752416 653.260608,  510.558048 661.2187296, 510.558048 669.1768512,    479.752416 677.1349728,  448.946784, 677.1349728,      418.141152 669.1768512,   418.141152 661.2187296" />
+    
+
+    <rect class="barrier_center" x="448.946784" y="602.2274544" width="30.805632" height="43.03728" fill="none" stroke="#111" stroke-width="3.00015144px"></rect>
+
+    <polygon class="barrier_perimeter" fill="none" stroke="#111" stroke-width="3.00015144" points="419.64122772 653.222856 419.64122772 610.185576   448.946784 602.2274544 479.752416 602.2274544  509.05797228 610.185576 509.05797228 653.222856  479.752416 645.2647344 448.946784 645.2647344"/>
+    
+
+      <polygon class="tapered_spire_base" fill="black" points="518.71248 4074.837624, 565.662437683 4416.64072106,  565.662437683 5127.32212106, 363.036762317 5127.32212106,  363.036762317 4416.64072106, 409.98672 4074.837624" />
+    
+
+  </svg>

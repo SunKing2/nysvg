@@ -1,19 +1,16 @@
-p_height = 4719
-p_width = 928
+b = 4719.0 * 2.4  # base multiplier for scaling
+p_height = b / 2.4
+p_width = .082 * b
 p_center = p_width / 2.0
-translate_x = 1675
-translate_y = 425
-translate_scale_x = 2.4
-translate_scale_y = translate_scale_x
 
 sil_color = "black"
 sil_secondary_color = "#111"
 
 # coordinates for bottom platform of tower
-level_zero_x = 339 - 12.5
-level_zero_y = 3039 + 495
-level_zero_width = 250 + 25
-level_zero_height = 65 + 5
+level_zero_y = .312 * b
+level_zero_width = .024 * b
+level_zero_height = .0062 * b
+level_zero_x = p_center - level_zero_width / 2.0
 
 # top two platforms are relatively smaller than the others below them.
 # this is a number I just produced arbitrarily based on a guess
@@ -21,7 +18,7 @@ multiplier_top_levels = .11
 
 # spire below 0th platform is taller
 spire_zero_multiplier = 1.09
-spire_height = 465
+spire_height = .041 * b
 # a spire's width is the platform's width * spire_width_multiplier
 spire_width_multiplier = 0.4
 spire_taper_top_y = level_zero_y + level_zero_height / 2.0 + spire_height * spire_zero_multiplier
@@ -30,7 +27,7 @@ spire_taper_height = spire_height * .73609
 spire_taper_middle_y = spire_taper_top_y + spire_taper_height
 spire_taper_middle_width = spire_taper_top_width * 1.86364
 # this .75 is just arbitrary, change it to what looks good:
-spire_taper_bottom_height = spire_height * .75 + 359 # 359 because it needed extending
+spire_taper_bottom_height = spire_height * .75 + .032 * b # .032 because it needed extending
 spire_color = sil_color # "#283250"
 
 tapered_base_color = sil_color
@@ -38,15 +35,15 @@ tapered_base_color = sil_color
 
 # these are the changes in coordinates for each level in the tower
 # the drawing starts with the bottom platform and add these to get the next platform
-delta_x = 12.5
-delta_y = -495
-delta_width = -25
-delta_height = -5
+delta_x = .0011 * b
+delta_y = -.044 * b
+delta_width = -.0022 * b
+delta_height = -.00044 * b
 
 peak_height = - delta_y
 peak_color = sil_color # "blue"
 subpeak_color = sil_color # "yellow"
-peak = (409.913, p_height - 4138.113 - peak_height, 107.477, peak_height)
+peak = (.036 * b, p_height - .365 * b - peak_height, .0095 * b, peak_height)
 
 # all platforms are delta_y apart, but
 # top platform is nearer to the previous platform
@@ -54,11 +51,11 @@ delta_y_top_level = delta_y * .75
 y_top_tweak = peak_height * .03 # .0347
 
 # each platform has a fence-like barrier to prevent people from falling off :)
-barrier_height = 43
-barrier_base_height = 8
+barrier_height = .0038 * b
+barrier_base_height = .000706 * b
 barrier_color = sil_secondary_color # "#666" #"yellow"  # TODO #333
 barrier_base_color = barrier_color # "green"
-barrier_thickness = 2.5
+barrier_thickness = .0002649 * b
 
 n_platforms = 7
 
@@ -67,16 +64,16 @@ platform_color = sil_color # "#0a1326"
 
 subplatform_color = "#111" # sil_color #"green"
 
-wire_width = 7;
-wire_delta = 24.3  # distance between this wire and next one
-win_delta = 17.0   # distance between inner wires
+wire_width = .00062 * b;
+wire_delta = .0021 * b  # distance between this wire and next one
+win_delta = .0015 * b   # distance between inner wires
 wire_color = sil_color #"red"
-wire_y = 3690.38
-wire_y2 = p_height + 117
+wire_y = .326 * b
+wire_y2 = p_height + .0103 * b
 # outer wire, inner wire
 wires = [
-    (286, wire_y, -39, wire_y2),
-    (390, wire_y, 257, wire_y2),
+    (.025 * b , wire_y, -.0034 * b, wire_y2),
+    (.034 * b, wire_y, .023 * b, wire_y2),
 ]
 
 # platforms
@@ -130,6 +127,7 @@ def draw_barrier(level, fill, stroke, stroke_width):
     x2 = square_x + 1 * square_width / 3.0
     x3 = square_x + 2 * square_width / 3.0
     x4 = square_x + square_width
+    # drawn strokes have half the stroke on the left of the point
     half = barrier_thickness / 2.0
 
     barrier_y = square_y - barrier_base_height - barrier_height
@@ -143,9 +141,9 @@ def draw_barrier(level, fill, stroke, stroke_width):
     print """
     <polygon class="barrier_perimeter" fill="none" stroke="{}" stroke-width="{}" points="{} {} {} {}   {} {} {} {}  {} {} {} {}  {} {} {} {}"/>
     """.format(barrier_color, barrier_thickness,
-               square_x + half, y2, square_x + half, y2 - barrier_height,
+               square_x + half, y2, square_x + half , y2 - barrier_height,
                x2, barrier_y, x3, barrier_y,
-               x4 - half, y2 - barrier_height, x4 - half, y2,
+               x4 - half , y2 - barrier_height, x4 - half, y2,
                x3, barrier_y + barrier_height, x2, barrier_y + barrier_height,
                )
 
@@ -360,18 +358,9 @@ print """
 
 
   <svg width="92.8" height="471.9" viewBox="0 0 928 4719">
-
-  <!--
-  <image xlink:href="straightview.png"
-  x="0" y="0"
-  width="38400" height="57600"/>
-  -->
-
   <image xlink:href="centeringtower5withreflection.png"
   x="0" y="0"
   width="928" height="4719"/>
-
-  <g id="tower">
   """
 
 # draw the 8 wires that support the tower at the base
@@ -403,10 +392,8 @@ for level in levels:
 draw_big_fat_base(spire_taper_top_y, spire_taper_top_width, spire_taper_middle_y, spire_taper_middle_width, spire_taper_bottom_height, tapered_base_color, "none", "0")
 
 print """
-  </g>
-  <use xlink:href="#tower" transform="translate({}, {})  scale({}, {})"/>
   </svg>
 </body>
 </html>
 
-""".format(translate_x, translate_y, translate_scale_x, translate_scale_y )
+"""
