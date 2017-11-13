@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <style>
-    body {
-      background-color: #009;
-    }
-    .view {
-      background-color: red;
-    }
-    .m {
-      stroke: red;
-      stroke-width: 10;
-    }
-
-  </style>
-  <title>wtc-silhouette</title>
-</head>
-<body>
-
-  <div class="louiediv view">
-    <svg width="384" height="576" viewBox="0 0 3840 5760">
+    <svg width="3840" height="5760" viewBox="0 0 3840 5760">
       <rect x="0" y="0" width="3839" height="5759" style="stroke: red; fill: green;"/>
       <path d="M561 3030
       686 2975
@@ -198,20 +174,8 @@
 
 
       </g>
-      <use xlink:href="#tower" transform=" translate(1608.37,49.28) scale(.244, .244)"/>
+      <use xlink:href="#tower" transform=" translate(1608.37, 49.28) scale(.244, .244)"/>
 
 
 
     </svg>
-
-
-
-  </div>
-
-
-</div>
-
-
-
-</body>
-</html>

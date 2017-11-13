@@ -3,7 +3,7 @@ p_width = 928
 p_center = p_width / 2.0
 translate_x = 1675
 translate_y = 425
-translate_scale_x = 2.4
+translate_scale_x = 2.44
 translate_scale_y = translate_scale_x
 
 sil_color = "black"
