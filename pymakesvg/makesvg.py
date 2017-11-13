@@ -1,9 +1,10 @@
 p_height = 4719
 p_width = 928
 p_center = p_width / 2.0
-translate_x = 1675
-translate_y = 425
-translate_scale_x = 2.44
+temp = 4.1374885
+translate_x = 1675 -16.05 * temp
+translate_y = 425 - 90.28 * temp
+translate_scale_x = 0.244
 translate_scale_y = translate_scale_x
 
 sil_color = "black"
@@ -359,17 +360,11 @@ print """
   </svg>
 
 
-  <svg width="92.8" height="471.9" viewBox="0 0 928 4719">
+  <svg width="928" height="4719" viewBox="0 0 3840 5760">
 
-  <!--
-  <image xlink:href="straightview.png"
+<image xlink:href="View_to_One_World_Trade_Center.jpg"
   x="0" y="0"
-  width="38400" height="57600"/>
-  -->
-
-  <image xlink:href="centeringtower5withreflection.png"
-  x="0" y="0"
-  width="928" height="4719"/>
+  width="3840" height="5760"/>
 
   <g id="tower">
   """
@@ -404,7 +399,7 @@ draw_big_fat_base(spire_taper_top_y, spire_taper_top_width, spire_taper_middle_y
 
 print """
   </g>
-  <use xlink:href="#tower" transform="translate({}, {})  scale({}, {})"/>
+  <use xlink:href="#tower" transform="translate({}, {})  scale({}, {}) rotate(-.6, 26.743, 297.239)"/>
   </svg>
 </body>
 </html>
